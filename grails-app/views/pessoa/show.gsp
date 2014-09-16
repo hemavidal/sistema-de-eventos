@@ -23,6 +23,69 @@
 			</g:if>
 			<ol class="property-list pessoa">
 			
+				<g:if test="${pessoaInstance?.nome}">
+				<li class="fieldcontain">
+					<span id="nome-label" class="property-label"><g:message code="pessoa.nome.label" default="Nome" /></span>
+					
+						<span class="property-value" aria-labelledby="nome-label"><g:fieldValue bean="${pessoaInstance}" field="nome"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${pessoaInstance?.idade}">
+				<li class="fieldcontain">
+					<span id="idade-label" class="property-label"><g:message code="pessoa.idade.label" default="Idade" /></span>
+					
+						<span class="property-value" aria-labelledby="idade-label"><g:fieldValue bean="${pessoaInstance}" field="idade"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${pessoaInstance?.sexo}">
+				<li class="fieldcontain">
+					<span id="sexo-label" class="property-label"><g:message code="pessoa.sexo.label" default="Sexo" /></span>
+					
+						<span class="property-value" aria-labelledby="sexo-label"><g:fieldValue bean="${pessoaInstance}" field="sexo"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${pessoaInstance?.cidade}">
+				<li class="fieldcontain">
+					<span id="cidade-label" class="property-label"><g:message code="pessoa.cidade.label" default="Cidade" /></span>
+					
+						<span class="property-value" aria-labelledby="cidade-label"><g:fieldValue bean="${pessoaInstance}" field="cidade"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${pessoaInstance?.estado}">
+				<li class="fieldcontain">
+					<span id="estado-label" class="property-label"><g:message code="pessoa.estado.label" default="Estado" /></span>
+					
+						<span class="property-value" aria-labelledby="estado-label"><g:fieldValue bean="${pessoaInstance}" field="estado"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${pessoaInstance?.inscricao}">
+				<li class="fieldcontain">
+					<span id="inscricao-label" class="property-label"><g:message code="pessoa.inscricao.label" default="Inscricao" /></span>
+					
+						<span class="property-value" aria-labelledby="inscricao-label"><g:link controller="inscricao" action="show" id="${pessoaInstance?.inscricao?.id}">${pessoaInstance?.inscricao?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${pessoaInstance?.pais}">
+				<li class="fieldcontain">
+					<span id="pais-label" class="property-label"><g:message code="pessoa.pais.label" default="Pais" /></span>
+					
+						<span class="property-value" aria-labelledby="pais-label"><g:fieldValue bean="${pessoaInstance}" field="pais"/></span>
+					
+				</li>
+				</g:if>
+			
 			</ol>
 			<g:form url="[resource:pessoaInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">

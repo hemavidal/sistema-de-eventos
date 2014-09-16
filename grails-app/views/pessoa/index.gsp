@@ -24,11 +24,35 @@
 			<thead>
 					<tr>
 					
+						<g:sortableColumn property="nome" title="${message(code: 'pessoa.nome.label', default: 'Nome')}" />
+					
+						<g:sortableColumn property="idade" title="${message(code: 'pessoa.idade.label', default: 'Idade')}" />
+					
+						<g:sortableColumn property="sexo" title="${message(code: 'pessoa.sexo.label', default: 'Sexo')}" />
+					
+						<g:sortableColumn property="cidade" title="${message(code: 'pessoa.cidade.label', default: 'Cidade')}" />
+					
+						<g:sortableColumn property="estado" title="${message(code: 'pessoa.estado.label', default: 'Estado')}" />
+					
+						<th><g:message code="pessoa.inscricao.label" default="Inscricao" /></th>
+					
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${pessoaInstanceList}" status="i" var="pessoaInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+					
+						<td><g:link action="show" id="${pessoaInstance.id}">${fieldValue(bean: pessoaInstance, field: "nome")}</g:link></td>
+					
+						<td>${fieldValue(bean: pessoaInstance, field: "idade")}</td>
+					
+						<td>${fieldValue(bean: pessoaInstance, field: "sexo")}</td>
+					
+						<td>${fieldValue(bean: pessoaInstance, field: "cidade")}</td>
+					
+						<td>${fieldValue(bean: pessoaInstance, field: "estado")}</td>
+					
+						<td>${fieldValue(bean: pessoaInstance, field: "inscricao")}</td>
 					
 					</tr>
 				</g:each>

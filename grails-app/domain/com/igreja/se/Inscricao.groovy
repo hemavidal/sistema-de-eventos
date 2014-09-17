@@ -2,16 +2,26 @@ package com.igreja.se
 
 class Inscricao {
 
-	boolean isConfirmada
-	String pastorResponsavel
+	String nome
+	int idade
+	String sexo
 	
-	static hasOne = [pessoa:Pessoa]
+	String pais
+	String estado
+	String cidade
+	
+	String pastorResponsavel
+
+	boolean isConfirmada
 	
     static constraints = {
+		nome nullable:false, blank:false
+		idade nullable:false, blank:false
+		sexo inList:['M', 'F'], nullable:false, blank:false
     }
 	
 	@Override
 	public String toString() {
-		return "$pessoa.nome";
+		return "$nome";
 	}
 }

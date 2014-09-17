@@ -1,22 +1,76 @@
 <%@ page import="com.igreja.se.Inscricao" %>
 
-
-
-<div class="fieldcontain ${hasErrors(bean: inscricaoInstance, field: 'isConfirmada', 'error')} ">
-	<label for="isConfirmada">
-		<g:message code="inscricao.isConfirmada.label" default="Is Confirmada" />
-		
-	</label>
-	<g:checkBox name="isConfirmada" value="${inscricaoInstance?.isConfirmada}" />
-
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: inscricaoInstance, field: 'pessoa', 'error')} required">
-	<label for="pessoa">
-		<g:message code="inscricao.pessoa.label" default="Pessoa" />
+<div class="form-group ${hasErrors(bean: inscricaoInstance, field: 'nome', 'error')} required">
+	<label for="nome" class="col-sm-2 control-label">
+		<g:message code="inscricao.nome.label" default="Nome" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="pessoa" name="pessoa.id" from="${com.igreja.se.Pessoa.list()}" optionKey="id" required="" value="${inscricaoInstance?.pessoa?.id}" class="many-to-one"/>
+	<div class="col-sm-10">
+		<g:textField class="form-control" name="nome" required="" value="${inscricaoInstance?.nome}"/>
+	</div>
 
 </div>
+
+<div class="form-group ${hasErrors(bean: inscricaoInstance, field: 'idade', 'error')} required">
+	<label for="idade" class="col-sm-2 control-label">
+		<g:message code="inscricao.idade.label" default="Idade" />
+		<span class="required-indicator">*</span>
+	</label>
+	<div class="col-sm-10">
+		<g:field class="form-control" name="idade" type="number" value="${inscricaoInstance.idade}" required=""/>
+	</div>
+
+</div>
+
+<div class="form-group ${hasErrors(bean: inscricaoInstance, field: 'sexo', 'error')} required">
+	<label for="sexo" class="col-sm-2 control-label">
+		<g:message code="inscricao.sexo.label" default="Sexo" />
+		<span class="required-indicator">*</span>
+	</label>
+	<div class="col-sm-10">
+		<g:select class="form-control"name="sexo" from="${inscricaoInstance.constraints.sexo.inList}" required="" value="${inscricaoInstance?.sexo}" valueMessagePrefix="inscricao.sexo"/>
+	</div>
+</div>
+
+<div class="form-group ${hasErrors(bean: inscricaoInstance, field: 'cidade', 'error')} required">
+	<label for="cidade" class="col-sm-2 control-label">
+		<g:message code="inscricao.cidade.label" default="Cidade" />
+		<span class="required-indicator">*</span>
+	</label>
+	<div class="col-sm-10">
+		<g:textField class="form-control" name="cidade" required="" value="${inscricaoInstance?.cidade}"/>
+	</div>
+</div>
+
+<div class="form-group ${hasErrors(bean: inscricaoInstance, field: 'estado', 'error')} required">
+	<label for="estado" class="col-sm-2 control-label">
+		<g:message code="inscricao.estado.label" default="Estado" />
+		<span class="required-indicator">*</span>
+	</label>
+	<div class="col-sm-10">
+		<g:textField class="form-control" name="estado" required="" value="${inscricaoInstance?.estado}"/>
+	</div>
+</div>
+
+<div class="form-group ${hasErrors(bean: inscricaoInstance, field: 'pais', 'error')} required">
+	<label for="pais" class="col-sm-2 control-label">
+		<g:message code="inscricao.pais.label" default="Pais" />
+		<span class="required-indicator">*</span>
+	</label>
+	<div class="col-sm-10">
+		<g:textField class="form-control" name="pais" required="" value="${inscricaoInstance?.pais}"/>
+	</div>
+</div>
+
+<g:if test="${actionName != 'create'}">
+	<div class="form-group  ${hasErrors(bean: inscricaoInstance, field: 'isConfirmada', 'error')} ">
+		<label for="isConfirmada" class="col-sm-2 control-label" >
+			<g:message code="inscricao.isConfirmada.label" default="Is Confirmada" />
+			
+		</label>
+		<div class="col-sm-10">
+			<g:checkBox class="form-control" name="isConfirmada" value="${inscricaoInstance?.isConfirmada}" />
+		</div>
+	</div>
+</g:if>
 

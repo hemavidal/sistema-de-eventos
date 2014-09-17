@@ -4,7 +4,7 @@ class Evento {
 
 	String nome
 	String descricao
-	Float inscricao
+	Float valorInscricao
 	
 	String pais
 	String estado
@@ -13,12 +13,12 @@ class Evento {
 	
 	String informacoes
 	
-	static hasMany = [inscricoes:Inscricao]
+	List<Inscricao> inscricoes 
 	
 	
     static constraints = {
 		nome nullable:false, blank:false
 		descricao nullable:false, blank:false
-		inscricao nullable:false, blank:false
+		valorInscricao nullable:false, blank:false
     }
 }

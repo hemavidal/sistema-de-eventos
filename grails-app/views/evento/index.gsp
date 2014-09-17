@@ -21,7 +21,7 @@
 					
 						<g:sortableColumn property="descricao" title="${message(code: 'evento.descricao.label', default: 'Descricao')}" />
 					
-						<g:sortableColumn property="inscricao" title="${message(code: 'evento.inscricao.label', default: 'Inscricao')}" />
+						<g:sortableColumn property="valorInscricao" title="${message(code: 'evento.valorInscricao.label', default: 'Valor da Inscricao')}" />
 					
 						<g:sortableColumn property="cidade" title="${message(code: 'evento.cidade.label', default: 'Cidade')}" />
 					
@@ -39,7 +39,7 @@
 					
 						<td>${fieldValue(bean: eventoInstance, field: "descricao")}</td>
 					
-						<td>${fieldValue(bean: eventoInstance, field: "inscricao")}</td>
+						<td>${fieldValue(bean: eventoInstance, field: "valorInscricao")}</td>
 					
 						<td>${fieldValue(bean: eventoInstance, field: "cidade")}</td>
 					

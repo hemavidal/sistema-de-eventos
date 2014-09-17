@@ -1,7 +1,5 @@
 package com.igreja.se
 
-
-
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -10,6 +8,14 @@ class UsuarioController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+	def login() {
+		Usuario usuario = Usuario.findByLoginAndSenha(params.login, params.senha)
+		
+		if (usuario) {
+			session.usuario = usuario
+		}
+	}
+	
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Usuario.list(params), model:[usuarioInstanceCount: Usuario.count()]

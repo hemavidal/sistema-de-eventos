@@ -44,6 +44,7 @@
 	              <li><a href="/sistema-de-eventos/evento/index">Eventos</a></li>
 	              <li><a href="/sistema-de-eventos/inscricao/create">Inscrição</a></li>
 	            </ul>
+	          <p class="navbar-text navbar-right"><a href="/sistema-de-eventos/user/login" class="navbar-link">Login</a></p>
 	          </div><!--/.nav-collapse -->
 	        </div>
       	</div>
@@ -59,5 +60,7 @@
 		</div>
 
 		<r:layoutResources/>
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	</body>
 </html>

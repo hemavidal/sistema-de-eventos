@@ -13,8 +13,9 @@ class Evento {
 	
 	String informacoes
 	
-	List<Inscricao> inscricoes 
+	List inscricoes 
 	
+	static hasMany = [inscricoes: Inscricao]
 	
     static constraints = {
 		nome nullable:false, blank:false

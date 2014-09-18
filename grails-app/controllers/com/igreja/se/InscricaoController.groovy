@@ -20,7 +20,7 @@ class InscricaoController {
     }
 
     def create() {
-        respond new Inscricao(params)
+        respond new Inscricao(params), model:[pessoaInstance: new Pessoa()]
     }
 
     @Transactional

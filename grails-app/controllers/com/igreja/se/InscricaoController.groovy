@@ -24,18 +24,42 @@ class InscricaoController {
     }
 
     @Transactional
-    def save(Inscricao inscricaoInstance) {
-        if (inscricaoInstance == null) {
+    def save(Inscricao inscricaoInstance, Pessoa pessoaInstance) {
+		println params
+		if (inscricaoInstance == null) {
             notFound()
             return
         }
-
-        if (inscricaoInstance.hasErrors()) {
-            respond inscricaoInstance.errors, view:'create'
-            return
-        }
-
+		
+		if (pessoaInstance.hasErrors()) {
+			respond pessoaInstance.errors, view:'create'
+			return
+		}
+		
+		pessoaInstance.save flush:true
+		
+		inscricaoInstance.pessoa = pessoaInstance
+		
+		if (!inscricaoInstance.validate(["pessoa"])) {
+			inscricaoInstance.erros.each {
+				println it
+			}
+		}
+				
         inscricaoInstance.save flush:true
+		
+		
+		Evento evento = Evento.findById(params.evento)
+		println "Evento: $params.evento"
+		
+		if (!evento) {
+			render "Error"
+			return
+		}
+		
+		evento.addToInscricoes(inscricaoInstance)
+		
+		evento.save flush:true
 
         request.withFormat {
             form multipartForm {

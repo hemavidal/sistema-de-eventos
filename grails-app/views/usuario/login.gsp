@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><g:message code="central.main.title"/></title>
+    <title><g:message code="Login"/></title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap.css')}" type="text/css">
@@ -28,7 +28,7 @@
         <div class="col-sm-6 col-md-4 col-md-offset-4">
           <h1 class="text-center login-title">Acesso ao Sistema de Eventos</h1>
           <div class="account-wall">
-            <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120" alt="">
+            <img class="profile-img" src="${assetPath(src: 'logo.png')}" alt="">
             <g:form class="form-signin" url="[controller:'usuario', action:'login']">
               <input type="text" class="form-control" name="usuario" placeholder="Usuário" required autofocus>
               <input type="password" class="form-control" name="senha" placeholder="Senha" required>

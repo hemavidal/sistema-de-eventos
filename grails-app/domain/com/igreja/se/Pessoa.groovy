@@ -15,4 +15,9 @@ class Pessoa {
 		idade nullable:false, blank:false
 		sexo inList:['M', 'F'], nullable:false, blank:false
     }
+	
+	@Override
+	public String toString() {
+		return "$nome";
+	}
 }

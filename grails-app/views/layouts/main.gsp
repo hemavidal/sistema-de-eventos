@@ -9,7 +9,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<title><g:layoutTitle default="Sistema de Enventos"/></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="shortcut icon" href="${assetPath(src: 'favicon.ico')}" type="image/x-icon">
+		<link rel="shortcut icon" href="${assetPath(src: 'logo.png')}">
 		<link rel="apple-touch-icon" href="${assetPath(src: 'apple-touch-icon.png')}">
 		<link rel="apple-touch-icon" sizes="114x114" href="${assetPath(src: 'apple-touch-icon-retina.png')}">
   		
@@ -36,7 +36,7 @@
 	              <span class="icon-bar"></span>
 	              <span class="icon-bar"></span>
 	            </button>
-	            <a class="navbar-brand" href="/sistema-de-eventos">Sistema de Eventos</a>
+	            <a class="navbar-brand" href="/sistema-de-eventos"><img height="25" width="25" src="${assetPath(src: 'logo.png')}" alt="">Sistema de Eventos</a>
 	          </div>
 	          <div class="navbar-collapse collapse">
 	            <ul class="nav navbar-nav">
@@ -44,7 +44,7 @@
 	              <li><a href="/sistema-de-eventos/evento/index">Eventos</a></li>
 	              <li><a href="/sistema-de-eventos/inscricao/create">Inscrição</a></li>
 	            </ul>
-	          <p class="navbar-text navbar-right"><a href="/sistema-de-eventos/user/login" class="navbar-link">Login</a></p>
+	          <p class="navbar-text navbar-right"><a href="/sistema-de-eventos/usuario/login" class="navbar-link">Login</a></p>
 	          </div><!--/.nav-collapse -->
 	        </div>
       	</div>
@@ -55,7 +55,7 @@
 			<hr>
 
 			<footer>
-				<p>&copy; Company 2013</p>
+				<p>&copy; SofITenG 2014</p>
 			</footer>
 		</div>
 

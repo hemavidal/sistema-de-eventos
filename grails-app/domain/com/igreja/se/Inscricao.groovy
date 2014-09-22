@@ -9,11 +9,9 @@ class Inscricao {
 	boolean isConfirmada
 	
     static constraints = {
+		pessoa nullable:false
+		pastorResponsavel nullable:false, blank:false
 		
     }
-	
-	static mapping = {
-		pessoa column: 'pessoa_id'
-	}
 	
 }

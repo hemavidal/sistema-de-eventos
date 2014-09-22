@@ -25,8 +25,6 @@
 					
 						<g:sortableColumn property="cidade" title="${message(code: 'evento.cidade.label', default: 'Cidade')}" />
 					
-						<g:sortableColumn property="endereco" title="${message(code: 'evento.endereco.label', default: 'Endereco')}" />
-					
 						<g:sortableColumn property="estado" title="${message(code: 'evento.estado.label', default: 'Estado')}" />
 					
 					</tr>
@@ -42,8 +40,6 @@
 						<td>${fieldValue(bean: eventoInstance, field: "valorInscricao")}</td>
 					
 						<td>${fieldValue(bean: eventoInstance, field: "cidade")}</td>
-					
-						<td>${fieldValue(bean: eventoInstance, field: "endereco")}</td>
 					
 						<td>${fieldValue(bean: eventoInstance, field: "estado")}</td>
 					

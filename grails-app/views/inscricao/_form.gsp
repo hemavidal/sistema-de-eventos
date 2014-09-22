@@ -62,6 +62,16 @@
 	</div>
 </div>
 
+<div class="form-group ${hasErrors(bean: inscricaoInstance, field: 'pastorResponsavel', 'error')} required">
+	<label for="pais" class="col-sm-2 control-label">
+		<g:message code="inscricao.pastorResponsavel.label" default="Pastor Responsavel" />
+		<span class="required-indicator">*</span>
+	</label>
+	<div class="col-sm-10">
+		<g:textField class="form-control" name="pastorResponsavel" required="" value="${inscricaoInstance?.pastorResponsavel}"/>
+	</div>
+</div>
+
 <g:if test="${actionName != 'create'}">
 	<div class="form-group  ${hasErrors(bean: inscricaoInstance, field: 'isConfirmada', 'error')} ">
 		<label for="isConfirmada" class="col-sm-2 control-label" >
@@ -74,3 +84,8 @@
 	</div>
 </g:if>
 
+<div class="form-group" hidden="true">
+	<div class="col-sm-10">
+		<g:checkBox class="form-control" name="evento" value="${params.evento}" />
+	</div>
+</div>

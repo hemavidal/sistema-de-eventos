@@ -1,3 +1,4 @@
+<%@ page import="com.igreja.se.Evento" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -10,6 +11,7 @@
 		
 		<div id="create-inscricao" class="content scaffold-create" role="main">
 			<h1><g:message code="default.create.label" args="[entityName]" /></h1>
+			<h3><g:link controller="evento" action="show" id="${params.evento}"> <g:message code="Evento: ${Evento.findById(params.evento).nome}" /> </g:link> </h3>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>

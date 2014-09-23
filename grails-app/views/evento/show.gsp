@@ -97,9 +97,6 @@
 			</g:form>
 			<div id="list-inscricao" class="content scaffold-list" role="main">
 				<h1><g:message code="Inscrições" /></h1>
-				<g:if test="${flash.message}">
-					<div class="message" role="status">${flash.message}</div>
-				</g:if>
 				<table class="table">
 				<thead>
 						<tr>
@@ -114,7 +111,7 @@
 					<g:each in="${eventoInstance.inscricoes}" status="i" var="inscricaoInstance">
 						<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 						
-							<td><g:link controller="inscricao" action="show" id="${inscricaoInstance.id}">${fieldValue(bean: inscricaoInstance, field: "pessoa")}</g:link></td>
+							<td><g:link controller="inscricao" action="show" id="${inscricaoInstance?.id}">${fieldValue(bean: inscricaoInstance, field: "pessoa")}</g:link></td>
 
 							<td>${fieldValue(bean: inscricaoInstance, field: "isConfirmada")}</td>
 

@@ -9,11 +9,19 @@ class UsuarioController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
 	def login() {
+		
+	}
+	
+	def authenticate = {
 		Usuario usuario = Usuario.findByLoginAndSenha(params.login, params.senha)
 		
-		if (usuario) {
-			session.usuario = usuario
+		if (!usuario) {
+			redirect(action:"login")
 		}
+		
+		session.usuario = usuario
+		
+		redirect(controller:"evento")
 	}
 	
     def index(Integer max) {

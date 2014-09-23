@@ -6,7 +6,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-10">
-		<g:textField class="form-control" name="nome" required="" value="${pessoaInstance?.nome}"/>
+		<g:textField class="form-control" name="pessoa.nome" required="" value="${inscricaoInstance?.pessoa?.nome}"/>
 	</div>
 
 </div>
@@ -17,7 +17,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-10">
-		<g:field class="form-control" name="idade" type="number" value="${pessoaInstance?.idade}" required=""/>
+		<g:field class="form-control" name="pessoa.idade" type="number" value="${inscricaoInstance?.pessoa?.idade}" required=""/>
 	</div>
 
 </div>
@@ -28,7 +28,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-10">
-		<g:select class="form-control" name="sexo" from="${['M', 'F']}" required="" value="${pessoaInstance?.sexo}" />
+		<g:select class="form-control" name="pessoa.sexo" from="${['M', 'F']}" required="" value="${inscricaoInstance?.pessoa?.sexo}" />
 	</div>
 </div>
 
@@ -38,7 +38,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-10">
-		<g:textField class="form-control" name="cidade" required="" value="${pessoaInstance?.cidade}"/>
+		<g:textField class="form-control" name="pessoa.cidade" required="" value="${inscricaoInstance?.pessoa?.cidade}"/>
 	</div>
 </div>
 
@@ -48,7 +48,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-10">
-		<g:textField class="form-control" name="estado" required="" value="${pessoaInstance?.estado}"/>
+		<g:textField class="form-control" name="pessoa.estado" required="" value="${inscricaoInstance?.pessoa?.estado}"/>
 	</div>
 </div>
 
@@ -58,7 +58,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-10">
-		<g:textField class="form-control" name="pais" required="" value="${pessoaInstance?.pais}"/>
+		<g:textField class="form-control" name="pessoa.pais" required="" value="${inscricaoInstance?.pessoa?.pais}"/>
 	</div>
 </div>
 
@@ -86,6 +86,6 @@
 
 <div class="form-group" hidden="true">
 	<div class="col-sm-10">
-		<g:checkBox class="form-control" name="evento" value="${params.evento}" />
+		<g:textField class="form-control" name="evento" value="${params.evento}" />
 	</div>
 </div>

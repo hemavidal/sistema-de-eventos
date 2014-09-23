@@ -29,7 +29,7 @@
           <h1 class="text-center login-title">Acesso ao Sistema de Eventos</h1>
           <div class="account-wall">
             <img class="profile-img" src="${assetPath(src: 'logo.png')}" alt="">
-            <g:form class="form-signin" url="[controller:'usuario', action:'login']">
+            <g:form class="form-signin" url="[controller:'usuario', action:'authenticate']">
               <input type="text" class="form-control" name="usuario" placeholder="Usuário" required autofocus>
               <input type="password" class="form-control" name="senha" placeholder="Senha" required>
               <button class="btn btn-lg btn-primary btn-block" type="submit">

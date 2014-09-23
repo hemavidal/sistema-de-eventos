@@ -49,7 +49,6 @@
 			</table>
 			<div class="nav" role="navigation">
 				<p>
-					<a class="btn btn-lg btn-default" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a>
 					<g:link class="btn btn-lg btn-success" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link>
 				</p>
 			</div>

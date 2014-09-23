@@ -20,25 +20,24 @@ class InscricaoController {
     }
 
     def create() {
-        respond new Inscricao(params), model:[pessoaInstance: new Pessoa()]
+        respond new Inscricao(params)
     }
 
     @Transactional
-    def save(Inscricao inscricaoInstance, Pessoa pessoaInstance) {
-		println params
+    def save(Inscricao inscricaoInstance) {
 		if (inscricaoInstance == null) {
             notFound()
             return
         }
 		
-		if (pessoaInstance.hasErrors()) {
-			respond pessoaInstance.errors, view:'create'
+		println "Pessoa: $inscricaoInstance.pessoa.properties"
+		
+		if (inscricaoInstance.pessoa.hasErrors()) {
+			respond pessoa.errors, view:'create'
 			return
 		}
 		
-		pessoaInstance.save flush:true
-		
-		inscricaoInstance.pessoa = pessoaInstance
+		inscricaoInstance.pessoa.save flush:true
 		
 		if (!inscricaoInstance.validate(["pessoa"])) {
 			inscricaoInstance.erros.each {
@@ -47,7 +46,6 @@ class InscricaoController {
 		}
 				
         inscricaoInstance.save flush:true
-		
 		
 		Evento evento = Evento.findById(params.evento)
 		println "Evento: $params.evento"

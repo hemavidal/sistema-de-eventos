@@ -22,7 +22,7 @@
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
-			<g:form url="[resource: inscricaoInstance, action:'save']" >
+			<g:form url="[action:'save']" >
 				<fieldset class="form-horizontal">
 					<g:render template="form"/>
 				</fieldset>

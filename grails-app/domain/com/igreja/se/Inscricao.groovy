@@ -8,6 +8,8 @@ class Inscricao {
 
 	boolean isConfirmada
 	
+	static belongsTo = [evento:Evento]
+	
     static constraints = {
 		pessoa nullable:false
 		pastorResponsavel nullable:false, blank:false

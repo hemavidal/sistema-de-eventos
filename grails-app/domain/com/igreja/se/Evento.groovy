@@ -6,6 +6,11 @@ class Evento {
 	String descricao
 	Float valorInscricao
 	
+	Date inicioDoEvento
+	Date fimDoEvento
+	Date fimDasInscricoes
+	
+	
 	String pais
 	String estado
 	String cidade

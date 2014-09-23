@@ -1,12 +1,12 @@
 import com.igreja.se.Evento
+import com.igreja.se.Pessoa
 import com.igreja.se.Usuario
 
 class BootStrap {
 
     def init = { servletContext ->
-		Usuario admin = new Usuario(login:"admin", senha:"seA2014").save(flush:true)
-		
-		Evento evento1 = new Evento(nome: "Evento 1", descricao:"Descrição do Evento1", valorInscricao:120.0, pais:"Brasil", cidade:"Campina Grande", estado:"Paraiba-PB", endereco:"Rua Exemplo, N-14, Bairro 1", informacoes:"Informações do Evento").save(flush:true)
+		Pessoa pessoa = new Pessoa(nome: "Administrador", cidade: "Campina Grande", estado: "Paraiba", idade: "24", pais: "Brasil", sexo: "M").save(flush:true)
+		new Usuario(login:"hemavidal@gmail.com", senha:"seA2014", pessoa:pessoa).save(flush:true)
 		
     }
     def destroy = {

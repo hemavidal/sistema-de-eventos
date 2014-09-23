@@ -8,7 +8,7 @@ class Usuario {
 	Pessoa pessoa
 	
     static constraints = {
-		login nullable:false, blank:false
+		login nullable:false, blank:false, email:true, unique:true
 		senha nullable:false, blank:false
     }
 }

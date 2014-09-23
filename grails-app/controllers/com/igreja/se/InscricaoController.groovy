@@ -30,8 +30,6 @@ class InscricaoController {
             return
         }
 		
-		println "Pessoa: $inscricaoInstance.pessoa.properties"
-		
 		if (inscricaoInstance.pessoa.hasErrors()) {
 			respond pessoa.errors, view:'create'
 			return
@@ -44,6 +42,8 @@ class InscricaoController {
 				println it
 			}
 		}
+		
+		println "inscricaoInstance.evento: $inscricaoInstance.evento"
 				
         inscricaoInstance.save flush:true
 		

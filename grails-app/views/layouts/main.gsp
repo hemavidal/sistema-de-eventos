@@ -41,9 +41,19 @@
 	          <div class="navbar-collapse collapse">
 	            <ul class="nav navbar-nav">
 	              <li class="active"><a href="/sistema-de-eventos/">Início</a></li>
-	              <li><a href="/sistema-de-eventos/evento/index">Eventos</a></li>
+	              <g:if test="${session.usuario}">
+	              	<li><a href="/sistema-de-eventos/evento/index">Eventos</a></li>
+	              	<li><a href="/sistema-de-eventos/pessoa/index">Pessoas</a></li>
+	              	<li><a href="/sistema-de-eventos/usuario/index">Usuários</a></li>
+	              	<li><a href="/sistema-de-eventos/inscricao/index">Inscrições</a></li>
+	              </g:if>
 	            </ul>
-	          <p class="navbar-text navbar-right"><a href="/sistema-de-eventos/usuario/login" class="navbar-link">Login</a></p>
+	          <g:if test="${!session.usuario}">  
+	          	<p class="navbar-text navbar-right"><a href="/sistema-de-eventos/usuario/login" class="navbar-link">Login</a></p>
+	          </g:if>
+	          <g:else>
+	          	<p class="navbar-text navbar-right">Logado como: "${session.usuario.login}" <a href="/sistema-de-eventos/usuario/logout" class="navbar-link">Logout</a></p>
+	          </g:else>
 	          </div><!--/.nav-collapse -->
 	        </div>
       	</div>

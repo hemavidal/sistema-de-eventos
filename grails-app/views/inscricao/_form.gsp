@@ -84,6 +84,17 @@
 	</div>
 </g:if>
 
+<div class="form-group  ${hasErrors(bean: inscricaoInstance, field: 'comprovante', 'error')} ">
+	<label for="comprovante" class="col-sm-2 control-label" >
+		<g:message code="inscricao.comprovante.label" default="Comprovante de Transferência"/>
+	</label>
+	<div class="col-sm-10">
+        <g:uploadForm controller='inscricao' action='save'>
+		    <input type='file' name='comprovante.file'/>
+		</g:uploadForm>
+	</div>
+</div>
+
 <div class="form-group" hidden="true">
 	<div class="col-sm-10">
 		<g:textField class="form-control" name="evento" value="${inscricaoInstance?.evento?.id}" disabled="${'show'.equals(actionName)}"/>

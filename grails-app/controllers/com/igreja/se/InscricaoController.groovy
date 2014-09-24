@@ -4,6 +4,8 @@ package com.igreja.se
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import org.springframework.web.multipart.MultipartHttpServletRequest
+import org.springframework.web.multipart.commons.CommonsMultipartFile
 
 @Transactional(readOnly = true)
 class InscricaoController {
@@ -25,11 +27,20 @@ class InscricaoController {
 
     @Transactional
     def save(Inscricao inscricaoInstance) {
+		println "params: $params"
+		def f = request.getFile('comprovante.file')
+		if (f.empty) {
+			flash.message = 'file cannot be empty'
+			render(view: 'create')
+			return
+		}
+		println f.properties
+		response.sendError(200, 'Done')
+		
 		if (inscricaoInstance == null) {
             notFound()
             return
         }
-		
 		if (inscricaoInstance.pessoa.hasErrors()) {
 			respond pessoa.errors, view:'create'
 			return
@@ -39,16 +50,16 @@ class InscricaoController {
 		
 		if (!inscricaoInstance.validate(["pessoa"])) {
 			inscricaoInstance.erros.each {
-				println it
+//				println it
 			}
 		}
 		
-		println "inscricaoInstance.evento: $inscricaoInstance.evento"
-				
+		inscricaoInstance.comprovante.save flush:true
+		
         inscricaoInstance.save flush:true
 		
+		
 		Evento evento = Evento.findById(params.evento)
-		println "Evento: $params.evento"
 		
 		if (!evento) {
 			render "Error"

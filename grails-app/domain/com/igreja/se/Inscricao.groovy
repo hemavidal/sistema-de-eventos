@@ -6,6 +6,8 @@ class Inscricao {
 	
 	String pastorResponsavel
 
+	static hasOne = [comprovante:Imagem]
+	
 	boolean isConfirmada
 	
 	static belongsTo = [evento:Evento]

@@ -1,0 +1,12 @@
+package com.igreja.se
+
+class Imagem {
+	byte[] file
+	
+	static belongsTo = [inscricao:Inscricao]
+	
+	static constraints = {
+		// Limit upload file size to 10MB
+		file maxSize: 1024 * 1024 * 10
+	}
+}

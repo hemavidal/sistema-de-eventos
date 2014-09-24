@@ -36,16 +36,16 @@
 	              <span class="icon-bar"></span>
 	              <span class="icon-bar"></span>
 	            </button>
-	            <a class="navbar-brand" href="/sistema-de-eventos"><img height="25" width="25" src="${assetPath(src: 'logo.png')}" alt="">Sistema de Eventos</a>
+	            <g:link class="navbar-brand"><img height="25" width="25" src="${assetPath(src: 'logo.png')}" alt="">Sistema de Eventos</g:link>
 	          </div>
 	          <div class="navbar-collapse collapse">
 	            <ul class="nav navbar-nav">
-	              <li class="active"><a href="/sistema-de-eventos/">Início</a></li>
+	              <li class="active"><a href="./">Início</a></li>
 	              <g:if test="${session.usuario}">
-	              	<li><a href="/sistema-de-eventos/evento/index">Eventos</a></li>
-	              	<li><a href="/sistema-de-eventos/pessoa/index">Pessoas</a></li>
-	              	<li><a href="/sistema-de-eventos/usuario/index">Usuários</a></li>
-	              	<li><a href="/sistema-de-eventos/inscricao/index">Inscrições</a></li>
+	              	<li><a href="./evento/index">Eventos</a></li>
+	              	<li><a href="./pessoa/index">Pessoas</a></li>
+	              	<li><a href="./usuario/index">Usuários</a></li>
+	              	<li><a href="./inscricao/index">Inscrições</a></li>
 	              </g:if>
 	            </ul>
 	          <g:if test="${!session.usuario}">  

@@ -17,9 +17,10 @@
 			<thead>
 					<tr>
 					
-						<g:sortableColumn property="isConfirmada" title="${message(code: 'inscricao.isConfirmada.label', default: 'Is Confirmada')}" />
+						<g:sortableColumn property="pessoa" title="${message(code: 'inscricao.pessoa.label', default: 'Pessoa')}"/>
+
+						<g:sortableColumn property="isConfirmada" title="${message(code: 'inscricao.isConfirmada.label', default: 'Situação')}" />
 					
-						<th><g:message code="inscricao.pessoa.label" default="Pessoa" /></th>
 					
 					</tr>
 				</thead>
@@ -27,9 +28,9 @@
 				<g:each in="${inscricaoInstanceList}" status="i" var="inscricaoInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${inscricaoInstance.id}">${fieldValue(bean: inscricaoInstance, field: "isConfirmada")}</g:link></td>
+						<td><g:link action="show" id="${inscricaoInstance.id}">${fieldValue(bean: inscricaoInstance, field: "pessoa")}</g:link></td>
 					
-						<td>${fieldValue(bean: inscricaoInstance, field: "pessoa")}</td>
+						<td>${fieldValue(bean: inscricaoInstance, field: "isConfirmada")}</td>
 					
 					</tr>
 				</g:each>

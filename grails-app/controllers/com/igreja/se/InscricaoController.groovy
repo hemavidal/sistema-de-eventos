@@ -136,9 +136,7 @@ class InscricaoController {
     }
 	
 	def displayGraph = {
-		println params
 		def img = Inscricao.findById(params.id).comprovante.file // byte array
-		println "img: $img"
 		//...
 //		response.setHeader('Content-length', img.length)
 		response.contentType = 'image/jpg' // or the appropriate image content type

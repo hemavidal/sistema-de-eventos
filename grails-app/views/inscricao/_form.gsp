@@ -76,7 +76,7 @@
 <g:if test="${actionName != 'create'}">
 	<div class="form-group  ${hasErrors(bean: inscricaoInstance, field: 'isConfirmada', 'error')} ">
 		<label for="isConfirmada" class="col-sm-2 control-label" >
-			<g:message code="inscricao.isConfirmada.label" default="Is Confirmada" />
+			<g:message code="inscricao.isConfirmada.label" default="Situação" />
 		</label>
 		<div class="col-sm-10">
 			<g:checkBox class="form-control" name="isConfirmada" value="${inscricaoInstance?.isConfirmada}" disabled="${'show'.equals(actionName)}"/>
@@ -89,7 +89,7 @@
 		<g:message code="inscricao.comprovante.label" default="Comprovante de Transferência"/>
 	</label>
 	<div class="col-sm-10">
-		<g:if test="${actionName == 'create'}">
+		<g:if test="${actionName in ['create', 'edit']}">
 	    	<g:field type='file' name='comprovante.file' value="${inscricaoInstance?.comprovante?.file}"/>
 	    </g:if>
 	    <g:else>

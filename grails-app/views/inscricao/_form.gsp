@@ -89,9 +89,12 @@
 		<g:message code="inscricao.comprovante.label" default="Comprovante de Transferência"/>
 	</label>
 	<div class="col-sm-10">
-        <g:uploadForm controller='inscricao' action='save'>
-		    <input type='file' name='comprovante.file'/>
-		</g:uploadForm>
+		<g:if test="${actionName == 'create'}">
+	    	<g:field type='file' name='comprovante.file' value="${inscricaoInstance?.comprovante?.file}"/>
+	    </g:if>
+	    <g:else>
+	    	<img width="100" height="100" src="${request.contextPath}/inscricao/displayGraph?id=${inscricaoInstance.id}"/>
+	    </g:else>
 	</div>
 </div>
 

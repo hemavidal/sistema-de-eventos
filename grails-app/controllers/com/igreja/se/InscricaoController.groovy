@@ -27,15 +27,15 @@ class InscricaoController {
 
     @Transactional
     def save(Inscricao inscricaoInstance) {
-		println "params: $params"
-		def f = request.getFile('comprovante.file')
-		if (f.empty) {
+//		println "params: $params"
+		def comprovante = request.getFile('comprovante.file')
+		if (comprovante.empty) {
 			flash.message = 'file cannot be empty'
 			render(view: 'create')
 			return
 		}
-		println f.properties
-		response.sendError(200, 'Done')
+		
+		inscricaoInstance.comprovante.nome = comprovante.getOriginalFilename()
 		
 		if (inscricaoInstance == null) {
             notFound()
@@ -54,9 +54,9 @@ class InscricaoController {
 			}
 		}
 		
-		inscricaoInstance.comprovante.save flush:true
-		
         inscricaoInstance.save flush:true
+
+//		inscricaoInstance.comprovante.save flush:true
 		
 		
 		Evento evento = Evento.findById(params.evento)
@@ -134,4 +134,15 @@ class InscricaoController {
             '*'{ render status: NOT_FOUND }
         }
     }
+	
+	def displayGraph = {
+		println params
+		def img = Inscricao.findById(params.id).comprovante.file // byte array
+		println "img: $img"
+		//...
+//		response.setHeader('Content-length', img.length)
+		response.contentType = 'image/jpg' // or the appropriate image content type
+		response.outputStream << img
+		response.outputStream.flush()
+	}
 }

@@ -1,6 +1,8 @@
 package com.igreja.se
 
 class Imagem {
+	String nome
+	
 	byte[] file
 	
 	static belongsTo = [inscricao:Inscricao]

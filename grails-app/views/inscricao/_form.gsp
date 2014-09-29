@@ -85,7 +85,7 @@
 	</div>
 </div>
 
-<g:if test="${actionName != 'create'}">
+<g:if test="${session?.usuario?.tipo.equals('admin') && actionName != 'create'}">
 	<div class="form-group  ${hasErrors(bean: inscricaoInstance, field: 'isConfirmada', 'error')} ">
 		<label for="isConfirmada" class="col-sm-2 control-label" >
 			<g:message code="inscricao.isConfirmada.label" default="Situação" />

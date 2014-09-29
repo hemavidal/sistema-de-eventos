@@ -23,41 +23,45 @@
 					<g:render template="form"/>
 				</fieldset>
 				<fieldset class="buttons">
-					<g:link class="edit btn btn-warning" action="edit" resource="${eventoInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					<g:actionSubmit class="delete btn btn-danger" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+					<g:if test="${session?.usuario?.tipo.equals('admin')}">
+						<g:link class="edit btn btn-warning" action="edit" resource="${eventoInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+						<g:actionSubmit class="delete btn btn-danger" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+					</g:if>
 					<g:link class="btn btn-success" controller='inscricao' action='create' params="[evento:eventoInstance.id]"><g:message code="default.button.inscricao.label" default="Fazer Inscrição" /></g:link>
 				</fieldset>
 			</g:form>
 			
-			<div id="list-inscricao" class="content scaffold-list" role="main">
-				<h1><g:message code="Inscrições" /></h1>
-				<table class="table">
-				<thead>
-						<tr>
-						
-							<g:sortableColumn property="pessoa" title="${message(code: 'default.pessoa.label', default: 'Pessoa')}" />
-
-							<g:sortableColumn property="isConfirmada" title="${message(code: 'inscricao.isConfirmada.label', default: 'Situação')}" />
-
-						</tr>
-					</thead>
-					<tbody>
-					<g:each in="${eventoInstance.inscricoes}" status="i" var="inscricaoInstance">
-						<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-						
-							<td><g:link controller="inscricao" action="show" id="${inscricaoInstance?.id}">${fieldValue(bean: inscricaoInstance, field: "pessoa")}</g:link></td>
-
-							<td>${fieldValue(bean: inscricaoInstance, field: "isConfirmada")}</td>
-
-						
-						</tr>
-					</g:each>
-					</tbody>
-				</table>
-				<div class="pagination">
-					<g:paginate total="${inscricaoInstanceCount ?: 0}" />
+			<g:if test="${session?.usuario?.tipo.equals('admin')}">
+				<div id="list-inscricao" class="content scaffold-list" role="main">
+					<h1><g:message code="Inscrições" /></h1>
+					<table class="table">
+					<thead>
+							<tr>
+							
+								<g:sortableColumn property="pessoa" title="${message(code: 'default.pessoa.label', default: 'Pessoa')}" />
+	
+								<g:sortableColumn property="isConfirmada" title="${message(code: 'inscricao.isConfirmada.label', default: 'Situação')}" />
+	
+							</tr>
+						</thead>
+						<tbody>
+						<g:each in="${eventoInstance.inscricoes}" status="i" var="inscricaoInstance">
+							<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+							
+								<td><g:link controller="inscricao" action="show" id="${inscricaoInstance?.id}">${fieldValue(bean: inscricaoInstance, field: "pessoa")}</g:link></td>
+	
+								<td>${fieldValue(bean: inscricaoInstance, field: "isConfirmada")}</td>
+	
+							
+							</tr>
+						</g:each>
+						</tbody>
+					</table>
+					<div class="pagination">
+						<g:paginate total="${inscricaoInstanceCount ?: 0}" />
+					</div>
 				</div>
-			</div>
+			</g:if>
 		</div>
 	</body>
 </html>

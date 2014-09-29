@@ -60,6 +60,7 @@ class InscricaoController {
 		
 		if (!evento) {
 			flash.message = message(code:'default.invalid.message', args:[message(code:'evento.label', default:'Evento')])
+			flash.type = "alert-danger"
 			return
 		}
 		

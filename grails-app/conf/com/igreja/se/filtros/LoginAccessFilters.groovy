@@ -1,24 +1,43 @@
 package com.igreja.se.filtros
 
+import com.igreja.se.Usuario
+
 class LoginAccessFilters {
 
 	def filters = {
-		restrictAccessOnlyWithLogin(controller:'assets', invert:true) {
+		loginFilters(controller:'usuario', action:'login') {
 			before = {
-				
-				if(!controllerName || controllerName.equals("")) {
+				println "Entrou no login"
+				if (!session.usuario) {
 					return true
-				}
-				
-				if (!session.usuario && !(actionName in ["login", "logout", "authenticate"])) {
-					redirect(controller:"usuario", action:"login")
+				} else {
 					return false
-				}
-				
-				if (session.usuario && actionName in ["login"]) {
-					redirect (controller:"", action:"index")
 				}
 			}
 		}
+		
+		restrictAccessOnlyWithAdminUser(controller:'usuario|pessoa', action:'*') {
+			before = {
+				if (actionName in ['login', 'logout','authenticate']) {
+					return true
+				}
+				
+				Usuario usuario = session?.usuario
+				if (!usuario) {
+					redirect(controller:"evento", action:"index")
+					return false
+				} else {
+					if (!usuario.tipo.equals('admin')) {
+						flash.message = "Usuario sem permissão."
+						flash.type = "alert-warning"
+						redirect(controller:"evento", action:"index")
+						return false
+					}
+				}
+				
+			}
+		}
+		
+		
 	}
 }

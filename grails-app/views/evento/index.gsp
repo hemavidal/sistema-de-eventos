@@ -24,8 +24,6 @@
 					
 						<g:sortableColumn property="nome" title="${message(code: 'evento.nome.label', default: 'Nome')}" />
 					
-						<g:sortableColumn property="descricao" title="${message(code: 'evento.descricao.label', default: 'Descricao')}" />
-					
 						<g:sortableColumn property="valorInscricao" title="${message(code: 'evento.valorInscricao.label', default: 'Valor da Inscricao')}" />
 					
 						<g:sortableColumn property="cidade" title="${message(code: 'evento.cidade.label', default: 'Cidade')}" />
@@ -40,8 +38,6 @@
 					
 						<td><g:link action="show" id="${eventoInstance.id}">${fieldValue(bean: eventoInstance, field: "nome")}</g:link></td>
 					
-						<td>${fieldValue(bean: eventoInstance, field: "descricao")}</td>
-					
 						<td>${fieldValue(bean: eventoInstance, field: "valorInscricao")}</td>
 					
 						<td>${fieldValue(bean: eventoInstance, field: "cidade")}</td>
@@ -52,11 +48,13 @@
 				</g:each>
 				</tbody>
 			</table>
-			<div class="nav" role="navigation">
-				<p>
-					<g:link class="btn btn-lg btn-success" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link>
-				</p>
-			</div>
+			<g:if test="${session?.usuario?.tipo.equals('admin')}">
+				<div class="nav" role="navigation">
+					<p>
+						<g:link class="btn btn-lg btn-success" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link>
+					</p>
+				</div>
+			</g:if>
 			<div class="pagination">
 				<g:paginate total="${eventoInstanceCount ?: 0}" />
 			</div>

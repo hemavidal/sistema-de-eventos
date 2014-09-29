@@ -56,6 +56,11 @@
 				</g:each>
 				</tbody>
 			</table>
+			<div class="nav" role="navigation">
+				<p>
+					<g:link class="btn btn-lg btn-success" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link>
+				</p>
+			</div>
 			<div class="pagination">
 				<g:paginate total="${pessoaInstanceCount ?: 0}" />
 			</div>

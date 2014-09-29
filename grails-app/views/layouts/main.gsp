@@ -40,8 +40,8 @@
 			<div class="collapse navbar-collapse" id="navigationbar">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="./">Início</a></li>
-					<g:if test="${session.usuario}">
-						<li><a href="/sistema-de-eventos/evento/index">Eventos</a></li>
+					<li><a href="/sistema-de-eventos/evento/index">Eventos</a></li>
+					<g:if test="${session?.usuario?.tipo == 'admin'}">
 						<li><a href="/sistema-de-eventos/pessoa/index">Pessoas</a></li>
 						<li><a href="/sistema-de-eventos/usuario/index">Usuários</a></li>
 						<li><a href="/sistema-de-eventos/inscricao/index">Inscrições</a></li>

@@ -1,6 +1,18 @@
 <%@ page import="com.igreja.se.Inscricao" %>
 <%@ page import="com.igreja.se.Evento" %>
 
+<div class="form-group ${hasErrors(bean: pessoaInstance, field: 'email', 'error')} required">
+	<label for="email" class="col-sm-2 control-label">
+		<g:message code="inscricao.nome.label" default="Email" />
+		<span class="required-indicator">*</span>
+	</label>
+	<div class="col-sm-10">
+		<g:textField class="form-control" type="email" name="pessoa.email" required="" value="${inscricaoInstance?.pessoa?.email}" disabled="${'show'.equals(actionName)}"/>
+	</div>
+
+</div>
+
+
 <div class="form-group ${hasErrors(bean: pessoaInstance, field: 'nome', 'error')} required">
 	<label for="nome" class="col-sm-2 control-label">
 		<g:message code="inscricao.nome.label" default="Nome" />

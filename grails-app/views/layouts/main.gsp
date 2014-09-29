@@ -17,18 +17,8 @@
 <link rel="apple-touch-icon" sizes="114x114"
 	href="${assetPath(src: 'apple-touch-icon-retina.png')}">
 
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-
-<!-- Optional theme -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-
-<!-- Latest compiled and minified JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
+    <asset:stylesheet src="application.css"/>
+    
 <g:layoutHead />
 <r:layoutResources />
 </head>
@@ -86,22 +76,6 @@
 	</div>
 
 	<r:layoutResources />
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		
-	<g:javascript>
-	$('.navbar').on('show.bs.collapse', function () {
-	    var actives = $(this).find('.collapse.in'),
-	        hasData;
-	    
-	    if (actives && actives.length) {
-	        hasData = actives.data('collapse')
-	        if (hasData && hasData.transitioning) return
-	        actives.collapse('hide')
-	        hasData || actives.data('collapse', null)
-	    }
-	});
-	</g:javascript>
+	<asset:javascript src="application.js"/>
 </body>
 </html>

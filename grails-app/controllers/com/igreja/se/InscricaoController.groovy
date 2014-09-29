@@ -55,14 +55,11 @@ class InscricaoController {
 		}
 		
         inscricaoInstance.save flush:true
-
-//		inscricaoInstance.comprovante.save flush:true
-		
 		
 		Evento evento = Evento.findById(params.evento)
 		
 		if (!evento) {
-			render "Error"
+			flash.message = message(code:'default.invalid.message', args:[message(code:'evento.label', default:'Evento')])
 			return
 		}
 		
@@ -73,6 +70,7 @@ class InscricaoController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'inscricao.label', default: 'Inscricao'), inscricaoInstance.id])
+				flash.type = "alert-success"
                 redirect inscricaoInstance
             }
             '*' { respond inscricaoInstance, [status: CREATED] }

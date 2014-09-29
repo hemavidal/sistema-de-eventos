@@ -14,6 +14,10 @@ class LoginAccessFilters {
 					redirect(controller:"usuario", action:"login")
 					return false
 				}
+				
+				if (session.usuario && actionName in ["login"]) {
+					redirect (controller:"", action:"index")
+				}
 			}
 		}
 	}

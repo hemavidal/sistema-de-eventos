@@ -34,6 +34,17 @@
 
 </div>
 
+<div class="form-group ${hasErrors(bean: eventoInstance, field: 'vagas', 'error')} required">
+	<label for="vagas" class="col-sm-2 control-label">
+		<g:message code="evento.vagas.label" default="Vagas" />
+		<span class="required-indicator">*</span>
+	</label>
+	<div class="col-sm-10">
+		<g:textField class="form-control" name="vagas" value="${fieldValue(bean: eventoInstance, field: 'vagas')}" type="number" required="" disabled="${'show'.equals(actionName)}"/>
+	</div>
+
+</div>
+
 <div class="form-group ${hasErrors(bean: eventoInstance, field: 'cidade', 'error')} required">
 	<label for="cidade" class="col-sm-2 control-label">
 		<g:message code="evento.cidade.label" default="Cidade" />
@@ -67,6 +78,26 @@
 
 </div>
 
+<div class="form-group ${hasErrors(bean: eventoInstance, field: 'telefonesContato', 'error')} required">
+	<label for="telefonesContato" class="col-sm-2 control-label">
+		<g:message code="evento.telefonesContato.label" default="Telefones para contato" />
+		<span class="required-indicator">*</span>
+	</label>
+	<div class="col-sm-10">
+		<g:textField class="form-control" name="telefonesContato" required="" value="${eventoInstance?.telefonesContato}" disabled="${'show'.equals(actionName)}"/>
+	</div>
+</div>
+
+<div class="form-group ${hasErrors(bean: eventoInstance, field: 'infoTransporte', 'error')} required">
+	<label for="infoTransporte" class="col-sm-2 control-label">
+		<g:message code="evento.infoTransporte.label" default="Informações de Transporte" />
+		<span class="required-indicator">*</span>
+	</label>
+	<div class="col-sm-10">
+		<g:textField class="form-control" name="infoTransporte" required="" value="${eventoInstance?.infoTransporte}" disabled="${'show'.equals(actionName)}"/>
+	</div>
+</div>
+
 <div class="form-group ${hasErrors(bean: eventoInstance, field: 'informacoes', 'error')} required">
 	<label for="informacoes" class="col-sm-2 control-label">
 		<g:message code="evento.informacoes.label" default="Informacoes" />
@@ -95,7 +126,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-10">
-		<g:datePicker class="form-control" name="inicioDoEvento" value="${new Date()}"
+		<g:datePicker class="form-control" name="inicioDoEvento" value="${eventoInstance?.inicioDoEvento}"
               noSelection="['':'-Selecione-']" disabled="${'show'.equals(actionName)}"/>
 	</div>
 </div>
@@ -106,7 +137,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-10">
-		<g:datePicker class="form-control" name="fimDoEvento" value="${new Date()}"
+		<g:datePicker class="form-control" name="fimDoEvento" value="${eventoInstance?.fimDoEvento}"
               noSelection="['':'-Selecione-']" disabled="${'show'.equals(actionName)}"/>
 	</div>
 </div>
@@ -117,7 +148,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-10">
-		<g:datePicker class="form-control" name="fimDasInscricoes" value="${new Date()}"
+		<g:datePicker class="form-control" name="fimDasInscricoes" value="${eventoInstance?.fimDasInscricoes}"
               noSelection="['':'-Selecione-']" disabled="${'show'.equals(actionName)}"/>
 	</div>
 </div>

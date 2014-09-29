@@ -12,11 +12,12 @@ class UsuarioController {
 	}
 
 	def authenticate = {
-		Usuario usuario = Usuario.findByLoginAndSenha(params.login, params.senha)    
+		Usuario usuario = Usuario.findByLoginAndSenha(params.login, params.senha.encodeAsSHA())
 		
 		if(usuario){
 			session.usuario = usuario
-			flash.message = "Bem vindo ${usuario.login}!"       
+			flash.message = "Bem vindo ${usuario.login}!"
+			flash.type = "alert-success"       
 			redirect(controller:"evento", action:"index")
 		}else{
 			flash.message = "Usuario ou Senha incorretos."       

@@ -5,16 +5,19 @@ class Evento {
 	String nome
 	String descricao
 	Float valorInscricao
+	Integer vagas
 	
 	Date inicioDoEvento
 	Date fimDoEvento
 	Date fimDasInscricoes
 	
-	
 	String pais
 	String estado
 	String cidade
 	String endereco 
+	
+	String telefonesContato
+	String infoTransporte
 	
 	String informacoes
 	
@@ -24,5 +27,6 @@ class Evento {
 		nome nullable:false, blank:false
 		descricao nullable:false, blank:false
 		valorInscricao nullable:false, blank:false
+		vagas min:0
     }
 }

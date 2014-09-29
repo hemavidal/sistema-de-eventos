@@ -18,7 +18,12 @@
 		<div id="edit-usuario" class="content scaffold-edit" role="main">
 			<h1><g:message code="default.edit.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
+				<div class="alert ${flash.type} text-center" role="status"
+					id="alerta">
+					<a class="close" data-dismiss="alert"
+						onclick="$('#alerta').hide(500);">×</a>
+					${flash.message}
+				</div>
 			</g:if>
 			<g:hasErrors bean="${usuarioInstance}">
 			<ul class="errors" role="alert">

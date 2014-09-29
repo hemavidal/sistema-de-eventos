@@ -13,7 +13,12 @@
 			<h1><g:message code="default.create.label" args="[entityName]" /></h1>
 			<h3><g:link controller="evento" action="show" id="${params.evento}"> <g:message code="Evento: ${Evento.findById(params.evento).nome}" /> </g:link> </h3>
 			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
+				<div class="alert ${flash.type} text-center" role="status"
+					id="alerta">
+					<a class="close" data-dismiss="alert"
+						onclick="$('#alerta').hide(500);">×</a>
+					${flash.message}
+				</div>
 			</g:if>
 			<g:hasErrors bean="${inscricaoInstance}">
 			<ul class="errors" role="alert">

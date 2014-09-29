@@ -11,4 +11,8 @@ class Usuario {
 		login nullable:false, blank:false, email:true, unique:true
 		senha nullable:false, blank:false
     }
+	
+	static beforeInsert = {
+		senha = senha.encodeAsSHA()
+	}
 }

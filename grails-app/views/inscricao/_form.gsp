@@ -1,6 +1,20 @@
 <%@ page import="com.igreja.se.Inscricao" %>
 <%@ page import="com.igreja.se.Evento" %>
 
+<div class="form-group  ${hasErrors(bean: pessoaInstance, field: 'foto', 'error')} ">
+	<label for="foto" class="col-sm-2 control-label" >
+		<g:message code="pessoa.foto.label" default="Foto"/>
+	</label>
+	<div class="col-sm-10">
+		<g:if test="${actionName in ['create', 'edit', 'save']}">
+	    	<g:field type='file' name='pessoa.foto.file' value="${inscricaoInstance?.pessoa?.foto?.file}"/>
+	    </g:if>
+	    <g:else>
+	    	<img width="100" height="100" src="${request.contextPath}/pessoa/displayGraph?id=${inscricaoInstance.pessoa.id}"/>
+	    </g:else>
+	</div>
+</div>
+
 <div class="form-group ${hasErrors(bean: pessoaInstance, field: 'email', 'error')} required">
 	<label for="email" class="col-sm-2 control-label">
 		<g:message code="inscricao.nome.label" default="Email" />
@@ -41,7 +55,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-10">
-		<g:select class="form-control" name="pessoa.sexo" from="${['M', 'F']}" required="" value="${inscricaoInstance?.pessoa?.sexo}" disabled="${'show'.equals(actionName)}"/>
+		<g:select class="form-control" name="pessoa.sexo" from="${['Masculino', 'Feminino']}" required="" value="${inscricaoInstance?.pessoa?.sexo}" disabled="${'show'.equals(actionName)}"/>
 	</div>
 </div>
 
@@ -91,7 +105,7 @@
 			<g:message code="inscricao.isConfirmada.label" default="Situação" />
 		</label>
 		<div class="col-sm-10">
-			<g:checkBox class="form-control" name="isConfirmada" value="${inscricaoInstance?.isConfirmada}" disabled="${'show'.equals(actionName)}"/>
+			<g:checkBox class="form-control" name="isConfirmada" value="${inscricaoInstance?.isConfirmada}" disabled="${actionName in ['show','save']}"/>
 		</div>
 	</div>
 </g:if>
@@ -101,7 +115,7 @@
 		<g:message code="inscricao.comprovante.label" default="Comprovante de Transferência"/>
 	</label>
 	<div class="col-sm-10">
-		<g:if test="${actionName in ['create', 'edit']}">
+		<g:if test="${actionName in ['create', 'edit', 'save']}">
 	    	<g:field type='file' name='comprovante.file' value="${inscricaoInstance?.comprovante?.file}"/>
 	    </g:if>
 	    <g:else>

@@ -5,7 +5,7 @@ class Imagem {
 	
 	byte[] file
 	
-	static belongsTo = [inscricao:Inscricao]
+	static belongsTo = [inscricao:Inscricao, pessoa:Pessoa]
 	
 	static constraints = {
 		// Limit upload file size to 10MB

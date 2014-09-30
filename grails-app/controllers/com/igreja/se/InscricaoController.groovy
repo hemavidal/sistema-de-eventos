@@ -27,7 +27,7 @@ class InscricaoController {
 
     @Transactional
     def save(Inscricao inscricaoInstance) {
-//		println "params: $params"
+		def foto = request.getFile('pessoa.foto.file')
 		def comprovante = request.getFile('comprovante.file')
 		if (comprovante.empty) {
 			flash.message = 'file cannot be empty'
@@ -36,24 +36,30 @@ class InscricaoController {
 		}
 		
 		inscricaoInstance.comprovante.nome = comprovante.getOriginalFilename()
+		inscricaoInstance.pessoa.foto.nome = foto.getOriginalFilename()
 		
 		if (inscricaoInstance == null) {
             notFound()
             return
         }
 		if (inscricaoInstance.pessoa.hasErrors()) {
-			respond pessoa.errors, view:'create'
+			respond inscricaoInstance.pessoa.errors, view:'create'
+			return
+		}
+		
+		if ('M'.equals(inscricaoInstance.pessoa.sexo.getAt(0).toUpperCase())) {
+			inscricaoInstance.pessoa.sexo = 'M'
+		} else {
+			inscricaoInstance.pessoa.sexo = 'F'
+		}
+		
+		if (inscricaoInstance.hasErrors()) {
+			flash.type = 'alert-danger'
+			respond inscricaoInstance.errors, view:'create'
 			return
 		}
 		
 		inscricaoInstance.pessoa.save flush:true
-		
-		if (!inscricaoInstance.validate(["pessoa"])) {
-			inscricaoInstance.erros.each {
-//				println it
-			}
-		}
-		
         inscricaoInstance.save flush:true
 		
 		Evento evento = Evento.findById(params.evento)
@@ -84,17 +90,30 @@ class InscricaoController {
 
     @Transactional
     def update(Inscricao inscricaoInstance) {
-        if (inscricaoInstance == null) {
+        def foto = request.getFile('pessoa.foto.file')
+		def comprovante = request.getFile('comprovante.file')
+		if (comprovante.empty) {
+			flash.message = 'file cannot be empty'
+			render(view: 'create')
+			return
+		}
+		
+		inscricaoInstance.comprovante.nome = comprovante.getOriginalFilename()
+		inscricaoInstance.pessoa.foto.nome = foto.getOriginalFilename()
+		
+		if (inscricaoInstance == null) {
             notFound()
             return
         }
-
-        if (inscricaoInstance.hasErrors()) {
-            respond inscricaoInstance.errors, view:'edit'
-            return
-        }
-
-        inscricaoInstance.save flush:true
+		
+		if (inscricaoInstance.hasErrors()) {
+			redirect(action:'create', params:[evento:params.evento])
+			return
+		}
+		
+		chain(controller:'pessoa', action:'save', model:[pessoaInstance: inscricaoInstance?.pessoa])
+        
+		inscricaoInstance.save flush:true
 
         request.withFormat {
             form multipartForm {

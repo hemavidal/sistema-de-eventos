@@ -7,7 +7,6 @@ class LoginAccessFilters {
 	def filters = {
 		loginFilters(controller:'usuario', action:'login') {
 			before = {
-				println "Entrou no login"
 				if (!session.usuario) {
 					return true
 				} else {
@@ -18,7 +17,7 @@ class LoginAccessFilters {
 		
 		restrictAccessOnlyWithAdminUser(controller:'usuario|pessoa', action:'*') {
 			before = {
-				if (actionName in ['login', 'logout','authenticate']) {
+				if (actionName in ['login', 'logout','authenticate', 'displayGraph']) {
 					return true
 				}
 				
@@ -28,7 +27,7 @@ class LoginAccessFilters {
 					return false
 				} else {
 					if (!usuario.tipo.equals('admin')) {
-						flash.message = "Usuario sem permiss�o."
+						flash.message = "Usuário sem permissão."
 						flash.type = "alert-warning"
 						redirect(controller:"evento", action:"index")
 						return false

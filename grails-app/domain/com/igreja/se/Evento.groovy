@@ -4,8 +4,10 @@ class Evento {
 
 	String nome
 	String descricao
-	Float valorInscricao
+	String valorInscricao
+	
 	Integer vagas
+	String infoDeVagas
 	
 	Date inicioDoEvento
 	Date fimDoEvento

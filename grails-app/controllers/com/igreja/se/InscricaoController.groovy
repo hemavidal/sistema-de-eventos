@@ -28,9 +28,14 @@ class InscricaoController {
     @Transactional
     def save(Inscricao inscricaoInstance) {
 		def foto = request.getFile('pessoa.foto.file')
+		
+		
 		def comprovante = request.getFile('comprovante.file')
+		
+		
 		if (comprovante.empty) {
-			flash.message = 'file cannot be empty'
+			flash.message = 'O envio do comprovante é obrigatório.'
+			flash.type = 'alert-danger'
 			render(view: 'create')
 			return
 		}
@@ -59,13 +64,15 @@ class InscricaoController {
 			return
 		}
 		
+		inscricaoInstance.pessoa.foto.save flush:true
 		inscricaoInstance.pessoa.save flush:true
-        inscricaoInstance.save flush:true
+		inscricaoInstance.comprovante.save flush:true
+		inscricaoInstance.save flush:true
 		
 		Evento evento = Evento.findById(params.evento)
 		
 		if (!evento) {
-			flash.message = message(code:'default.invalid.message', args:[message(code:'evento.label', default:'Evento')])
+			flash.message = "Inscrição não efetuada devido a um problema de caminho de URL! \n Tente Novamente"
 			flash.type = "alert-danger"
 			return
 		}
@@ -76,7 +83,7 @@ class InscricaoController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'inscricao.label', default: 'Inscricao'), inscricaoInstance.id])
+                flash.message = "Inscrição evetuada com sucesso! :)"
 				flash.type = "alert-success"
                 redirect inscricaoInstance
             }
@@ -93,7 +100,8 @@ class InscricaoController {
         def foto = request.getFile('pessoa.foto.file')
 		def comprovante = request.getFile('comprovante.file')
 		if (comprovante.empty) {
-			flash.message = 'file cannot be empty'
+			flash.message = 'O envio do comprovante é obrigatório.'
+			flash.type = 'alert-danger'
 			render(view: 'create')
 			return
 		}

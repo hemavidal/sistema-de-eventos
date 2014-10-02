@@ -29,7 +29,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-10">
-		<g:textField class="form-control" name="valorInscricao" value="${fieldValue(bean: eventoInstance, field: 'valorInscricao')}" type="number" required="" disabled="${'show'.equals(actionName)}"/>
+		<g:textField class="form-control" name="valorInscricao" value="${fieldValue(bean: eventoInstance, field: 'valorInscricao')}" required="" disabled="${'show'.equals(actionName)}"/>
 	</div>
 
 </div>
@@ -44,6 +44,18 @@
 	</div>
 
 </div>
+
+<div class="form-group ${hasErrors(bean: eventoInstance, field: 'infoDeVagas', 'error')} required">
+	<label for="infoDeVagas" class="col-sm-2 control-label">
+		<g:message code="evento.infoDeVagas.label" default="Informações de Vagas" />
+		<span class="required-indicator">*</span>
+	</label>
+	<div class="col-sm-10">
+		<g:textField class="form-control" name="infoDeVagas" value="${fieldValue(bean: eventoInstance, field: 'infoDeVagas')}" required="" disabled="${'show'.equals(actionName)}"/>
+	</div>
+
+</div>
+
 
 <div class="form-group ${hasErrors(bean: eventoInstance, field: 'cidade', 'error')} required">
 	<label for="cidade" class="col-sm-2 control-label">

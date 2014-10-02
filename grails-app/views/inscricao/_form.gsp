@@ -10,7 +10,7 @@
 	    	<g:field type='file' name='pessoa.foto.file' value="${inscricaoInstance?.pessoa?.foto?.file}"/>
 	    </g:if>
 	    <g:else>
-	    	<img width="100" height="100" src="${request.contextPath}/pessoa/displayGraph?id=${inscricaoInstance.pessoa.id}"/>
+	    	<img class="holder" src="${request.contextPath}/pessoa/displayGraph?id=${inscricaoInstance.pessoa.id}"/>
 	    </g:else>
 	</div>
 </div>
@@ -99,6 +99,16 @@
 	</div>
 </div>
 
+<div class="form-group ${hasErrors(bean: inscricaoInstance, field: 'localidadeIgreja', 'error')} required">
+	<label for="localidadeIgreja" class="col-sm-2 control-label">
+		<g:message code="inscricao.localidadeIgreja.label" default="Igreja" />
+		<span class="required-indicator">*</span>
+	</label>
+	<div class="col-sm-10">
+		<g:select class="form-control" name="localidadeIgreja" from="${['Igreja Local', 'Extra Local']}" required="" value="${inscricaoInstance?.localidadeIgreja}" disabled="${'show'.equals(actionName)}"/>
+	</div>
+</div>
+
 <g:if test="${session?.usuario?.tipo.equals('admin') && actionName != 'create'}">
 	<div class="form-group  ${hasErrors(bean: inscricaoInstance, field: 'isConfirmada', 'error')} ">
 		<label for="isConfirmada" class="col-sm-2 control-label" >
@@ -119,7 +129,7 @@
 	    	<g:field type='file' name='comprovante.file' value="${inscricaoInstance?.comprovante?.file}"/>
 	    </g:if>
 	    <g:else>
-	    	<img width="100" height="100" src="${request.contextPath}/inscricao/displayGraph?id=${inscricaoInstance.id}"/>
+	    	<img class="holder" src="${request.contextPath}/inscricao/displayGraph?id=${inscricaoInstance.id}"/>
 	    </g:else>
 	</div>
 </div>

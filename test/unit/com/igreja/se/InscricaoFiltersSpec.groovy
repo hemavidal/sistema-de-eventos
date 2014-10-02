@@ -1,5 +1,7 @@
 package com.igreja.se
 
+import com.igreja.se.filtros.InscricaoFilters;
+
 import grails.test.mixin.Mock
 import spock.lang.Specification
 

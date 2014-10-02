@@ -9,7 +9,6 @@ class EventoFilters {
     def filters = {
         acessoDeUsuariosParaEvento(controller:'evento', action:'create|save|update|edit') {
             before = {
-				println "Entrou"
 				Usuario usuario = session.usuario
 				if (!'admin'.equals(usuario.tipo)) {
 					redirect(action:"index")

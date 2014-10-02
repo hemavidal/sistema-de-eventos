@@ -22,10 +22,12 @@
 				<fieldset class="form-horizontal">
 					<g:render template="form"/>
 				</fieldset>
-				<fieldset class="buttons">
-					<g:link class="edit btn btn-warning" action="edit" resource="${inscricaoInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					<g:actionSubmit class="delete btn btn-danger" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-				</fieldset>
+				<g:if test="${session?.usuario?.tipo?.equals('admin')}">
+					<fieldset class="buttons">
+						<g:link class="edit btn btn-warning" action="edit" resource="${inscricaoInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+						<g:actionSubmit class="delete btn btn-danger" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+					</fieldset>
+				</g:if>
 			</g:form>
 		</div>
 	</body>

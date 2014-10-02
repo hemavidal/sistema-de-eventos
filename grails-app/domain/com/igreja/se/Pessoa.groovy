@@ -2,7 +2,8 @@ package com.igreja.se
 
 class Pessoa {
 
-	static hasOne = [foto:Imagem]
+	
+	Imagem foto
 	
 	String email
 	String nome
@@ -18,7 +19,7 @@ class Pessoa {
     static constraints = {
 		foto nullable:true, blank:true
 		nome nullable:false, blank:false
-		idade nullable:false, blank:false
+		idade min:0, max: 100, nullable:false, blank:false
 		sexo inList:['M', 'F'], nullable:false, blank:false
 		email nullable:false, email: true, blank: false
 		sangue nullable:true, blank:true, inList:['A+','A-','B+','B-','AB+','AB-','O+','O-']

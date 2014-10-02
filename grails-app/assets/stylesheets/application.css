@@ -10,3 +10,12 @@
 *= require_self
 *= require bootstrap
 */
+.holder {   
+  width: auto;
+  display: inline-block;    
+}
+
+.holder img {
+  width: 100%; /* Will shrink image to 30% of its original width */
+  height: auto;    
+}​

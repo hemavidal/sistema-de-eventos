@@ -6,16 +6,18 @@ class Inscricao {
 	
 	String pastorResponsavel
 
-	static hasOne = [comprovante:Imagem]
+	Imagem comprovante
 	
 	boolean isConfirmada
+	
+	String localidadeIgreja
 	
 	static belongsTo = [evento:Evento]
 	
     static constraints = {
 		pessoa nullable:false
 		pastorResponsavel nullable:false, blank:false
-		
+		localidadeIgreja blank:false, nullable:false, inList:['Igreja Local', 'Extra Local']
     }
 	
 }

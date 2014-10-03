@@ -40,6 +40,9 @@
 				<h2 class="featurette-heading">Local</h2>
 				<p class="lead">${eventoInstance.endereco + ', ' + eventoInstance.cidade + ', ' + eventoInstance.estado}</p>
 				
+				<h2 class="featurette-heading">Informações Complementares</h2>
+				<p class="lead">${eventoInstance.informacoes}</p>
+				
 				<p class="lead"><a href="https://www.google.com.br/maps/@-7.2711115,-36.2310166,253m/data=!3m1!1e3?hl=pt-BR">Veja no mapa</a></p>
 				
 				<g:link url="/sistema-de-eventos/inscricao/create?evento=${eventoInstance.id}" >

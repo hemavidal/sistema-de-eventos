@@ -27,6 +27,7 @@ class InscricaoController {
 
     @Transactional
     def save(Inscricao inscricaoInstance) {
+    	inscricaoInstance.dataInscricao = new Date()
 		def foto = request.getFile('pessoa.foto.file')
 		
 		
@@ -57,6 +58,7 @@ class InscricaoController {
 		} else {
 			inscricaoInstance.pessoa.sexo = 'F'
 		}
+		
 		
 		if (inscricaoInstance.hasErrors()) {
 			flash.type = 'alert-danger'

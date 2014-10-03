@@ -39,7 +39,8 @@ class EventoController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'evento.label', default: 'Evento'), eventoInstance.id])
+				flash.type = 'alert-success'
+                flash.message = 'Evento Criado com Sucesso!'
                 redirect eventoInstance
             }
             '*' { respond eventoInstance, [status: CREATED] }
@@ -66,7 +67,9 @@ class EventoController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Evento.label', default: 'Evento'), eventoInstance.id])
+				flash.type = 'alert-success'
+				flash.message = 'Evento Editado com Sucesso!'
+                //flash.message = message(code: 'default.updated.message', args: [message(code: 'Evento.label', default: 'Evento'), eventoInstance.id])
                 redirect eventoInstance
             }
             '*'{ respond eventoInstance, [status: OK] }
@@ -85,6 +88,8 @@ class EventoController {
 
         request.withFormat {
             form multipartForm {
+				flash.type = 'alert-success'
+				flash.message = 'Evento' + eventoInstance.nome + 'Deletado com Sucesso!'
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'Evento.label', default: 'Evento'), eventoInstance.id])
                 redirect action:"index", method:"GET"
             }

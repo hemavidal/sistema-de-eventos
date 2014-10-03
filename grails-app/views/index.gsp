@@ -34,6 +34,9 @@
 				<p class="lead">Início: ${eventoInstance.inicioDoEvento.format('dd/MM/yyyy - HH:mm')}</p>
 				<p class="lead">Fim: ${eventoInstance.fimDoEvento.format('dd/MM/yyyy - HH:mm')}</p>
 				
+				<h2 class="featurette-heading">Data Limite para Inscrição do Retiro</h2>
+				<p class="lead">${eventoInstance.fimDasInscricoes.format('dd/MM/yyyy - HH:mm')}</p>
+				
 				<h2 class="featurette-heading">Local</h2>
 				<p class="lead">${eventoInstance.endereco + ', ' + eventoInstance.cidade + ', ' + eventoInstance.estado}</p>
 				

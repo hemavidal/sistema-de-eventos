@@ -55,10 +55,6 @@ class InscricaoFilters {
 					return false
 				}
 				
-				if (Inscricoes.findAllByLocalidadeIgreja(params.localidadeIgreja).size()) {
-					
-				}
-				
 			}
 		}
 		

@@ -38,13 +38,14 @@
 
 </div>
 
-<div class="form-group ${hasErrors(bean: pessoaInstance, field: 'idade', 'error')} required">
-	<label for="idade" class="col-sm-2 control-label">
-		<g:message code="inscricao.idade.label" default="Idade" />
+<div class="form-group ${hasErrors(bean: pessoaInstance, field: 'dataNascimento', 'error')} required">
+	<label for="dataNascimento" class="col-sm-2 control-label">
+		<g:message code="inscricao.dataNascimento.label" default="Data de Nascimento" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-10">
-		<g:field class="form-control" name="pessoa.idade" type="number" value="${inscricaoInstance?.pessoa?.idade}" required="" disabled="${'show'.equals(actionName)}"/>
+		<g:datePicker class="form-control" name="dataNascimento" value="${pessoaInstance?.dataNascimento}"
+              noSelection="['':'-Selecione-']" disabled="${'show'.equals(actionName)}"/>
 	</div>
 
 </div>
@@ -56,6 +57,15 @@
 	</label>
 	<div class="col-sm-10">
 		<g:select class="form-control" name="pessoa.sexo" from="${['Masculino', 'Feminino']}" required="" value="${inscricaoInstance?.pessoa?.sexo}" disabled="${'show'.equals(actionName)}"/>
+	</div>
+</div>
+
+<div class="form-group ${hasErrors(bean: pessoaInstance, field: 'sangue', 'error')} required">
+	<label for="sangue" class="col-sm-2 control-label">
+		<g:message code="inscricao.sangue.label" default="Sangue" />
+	</label>
+	<div class="col-sm-10">
+		<g:select class="form-control" name="pessoa.sangue" from="${['A+','A-','B+','B-','AB+','AB-','O+','O-']}"  value="${inscricaoInstance?.pessoa?.sexo}" disabled="${'show'.equals(actionName)}"/>
 	</div>
 </div>
 

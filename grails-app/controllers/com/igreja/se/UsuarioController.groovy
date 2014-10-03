@@ -12,6 +12,7 @@ class UsuarioController {
 	}
 
 	def authenticate = {
+		println Usuario.list().size()
 		Usuario usuario = Usuario.findByLoginAndSenha(params.login, params.senha.encodeAsSHA())
 		
 		if(usuario){

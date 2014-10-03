@@ -1,4 +1,4 @@
-
+<%@ page import="com.igreja.se.Inscricao" %>
 <%@ page import="com.igreja.se.Evento" %>
 <!DOCTYPE html>
 <html>
@@ -39,7 +39,11 @@
 							<tr>
 							
 								<g:sortableColumn property="pessoa" title="${message(code: 'default.pessoa.label', default: 'Pessoa')}" />
-	
+								
+								<g:sortableColumn property="dataInscricao" title="${message(code: 'default.dataInscricao.label', default: 'Data da Inscrição')}" />
+								
+								<g:sortableColumn property="localidadeIgreja" title="${message(code: 'default.dataInscricao.label', default: 'Local da Igreja')}" />
+								
 								<g:sortableColumn property="isConfirmada" title="${message(code: 'inscricao.isConfirmada.label', default: 'Situação')}" />
 	
 							</tr>
@@ -49,13 +53,22 @@
 							<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 							
 								<td><g:link controller="inscricao" action="show" id="${inscricaoInstance?.id}">${fieldValue(bean: inscricaoInstance, field: "pessoa")}</g:link></td>
-	
-								<td>${fieldValue(bean: inscricaoInstance, field: "isConfirmada")}</td>
-	
+								
+								<td>${fieldValue(bean: inscricaoInstance, field: "dataInscricao").format('dd/MM/yyyy - HH:mm')}</td>
+								
+								<td>${fieldValue(bean: inscricaoInstance, field: "localidadeIgreja")}</td>
+								
+								<g:if test="${inscricaoInstance.isConfirmada}">
+									<td class="glyphicon glyphicon-ok"></td>
+								</g:if>
+								<g:else>
+									<td class="glyphicon glyphicon-remove"></td>
+								</g:else>
 							
 							</tr>
 						</g:each>
 						</tbody>
+						<p>${'Igreja Local: ' + Inscricao.countByLocalidadeIgreja('Igreja Local') + ', Extra Local: ' + Inscricao.countByLocalidadeIgreja('Extra Local')}</p>
 					</table>
 					<div class="pagination">
 						<g:paginate total="${inscricaoInstanceCount ?: 0}" />

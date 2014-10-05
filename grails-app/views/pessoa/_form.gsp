@@ -23,13 +23,13 @@
 
 </div>
 
-<div class="form-group ${hasErrors(bean: pessoaInstance, field: 'idade', 'error')} required">
-	<label for="idade" class="col-sm-2 control-label">
-		<g:message code="pessoa.idade.label" default="Idade" />
+<div class="form-group ${hasErrors(bean: pessoaInstance, field: 'dataNascimento', 'error')} required">
+	<label for="dataNascimento" class="col-sm-2 control-label">
+		<g:message code="pessoa.dataNascimento.label" default="Data de Nascimento" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-10">
-		<g:field class="form-control" name="idade" type="number" value="${pessoaInstance?.idade}" required="" disabled="${'show'.equals(actionName)}"/>
+		<g:datePicker precision="day" class="form-control" name="dataNascimento" value="${pessoaInstance?.dataNascimento}" required="" disabled="${'show'.equals(actionName)}"/>
 	</div>
 
 </div>
@@ -40,7 +40,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-10">
-		<g:select class="form-control" name="sexo" from="${['M', 'F']}" required="" value="${pessoaInstance?.sexo}" disabled="${'show'.equals(actionName)}"/>
+		<g:select class="form-control" name="sexo" from="${['Masculino', 'Feminino']}" required="" value="${pessoaInstance?.sexo}" disabled="${'show'.equals(actionName)}"/>
 	</div>
 </div>
 

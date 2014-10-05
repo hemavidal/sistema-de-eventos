@@ -25,7 +25,6 @@ class PessoaController {
 
     @Transactional
     def save(Pessoa pessoaInstance) {
-		println "Entrou"
 		if (pessoaInstance == null) {
             notFound()
             return
@@ -36,12 +35,6 @@ class PessoaController {
             return
         }
 
-		if ('M'.equals(inscricaoInstance.pessoa.sexo.getAt(0).toUpperCase())) {
-			inscricaoInstance.pessoa.sexo = 'M'
-		} else {
-			inscricaoInstance.pessoa.sexo = 'F'
-		}
-		
         pessoaInstance.save flush:true
 
         request.withFormat {
@@ -69,12 +62,6 @@ class PessoaController {
             return
         }
 
-		if ('M'.equals(inscricaoInstance.pessoa.sexo.getAt(0).toUpperCase())) {
-			inscricaoInstance.pessoa.sexo = 'M'
-		} else {
-			inscricaoInstance.pessoa.sexo = 'F'
-		}
-		
         pessoaInstance.save flush:true
 
         request.withFormat {
@@ -117,8 +104,7 @@ class PessoaController {
 	
 	def displayGraph = {
 		def img = Pessoa.findById(params.id).foto.file // byte array
-		println img
-		//...
+
 //		response.setHeader('Content-length', img.length)
 		response.contentType = 'image/jpg' // or the appropriate image content type
 		response.outputStream << img

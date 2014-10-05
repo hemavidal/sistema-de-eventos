@@ -12,7 +12,6 @@ class UsuarioController {
 	}
 
 	def authenticate = {
-		println Usuario.list().size()
 		Usuario usuario = Usuario.findByLoginAndSenha(params.login, params.senha.encodeAsSHA())
 		
 		if(usuario){
@@ -21,7 +20,7 @@ class UsuarioController {
 			flash.type = "alert-success"       
 			redirect(controller:"evento", action:"index")
 		}else{
-			flash.message = "Usuario ou Senha incorretos."       
+			flash.message = "Usuário ou Senha incorretos."       
 			redirect(action:"login")
 		}
 
@@ -29,7 +28,7 @@ class UsuarioController {
 	
 	def logout = {
 		session.usuario = null
-		redirect(view:"/")
+		redirect(uri:"/")
 	}
 
 	def index(Integer max) {

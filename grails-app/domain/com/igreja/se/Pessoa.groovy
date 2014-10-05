@@ -19,7 +19,7 @@ class Pessoa {
     static constraints = {
 		foto nullable:true, blank:true
 		nome nullable:false, blank:false
-		sexo inList:['M', 'F'], nullable:false, blank:false
+		sexo inList:['Masculino', 'Feminino'], nullable:false, blank:false
 		email nullable:false, email: true, blank: false
 		sangue nullable:true, blank:true, inList:['A+','A-','B+','B-','AB+','AB-','O+','O-']
 		

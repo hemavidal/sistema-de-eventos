@@ -116,7 +116,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-10">
-		<g:textField class="form-control" name="informacoes" required="" value="${eventoInstance?.informacoes}" disabled="${'show'.equals(actionName)}"/>
+		<g:textArea class="form-control" name="informacoes" required="" value="${eventoInstance?.informacoes}" disabled="${'show'.equals(actionName)}"/>
 	</div>
 
 </div>

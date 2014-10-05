@@ -9,7 +9,6 @@
 	<body>
 		<!-- START THE FEATURETTES -->
 
-      <h1>Eventos</h1>
       <hr class="featurette-divider">
 		
 	  <g:each in="${Evento.list()}" status="i" var="eventoInstance">
@@ -32,6 +31,7 @@
 				<g:link url="/sistema-de-eventos/inscricao/create?evento=${eventoInstance.id}" >
 					<p class="btn btn-lg btn-success lead glyphicon glyphicon-pencil">Inscrição</p>
 				</g:link>
+				<p class="" style="color:red">Sua Inscrição Será analisada pelos responsáveis e a confirmação será via email</p>
 				
 				<h2 class="featurette-heading">Descrição</h2>
 				<p class="lead">${eventoInstance?.descricao}</p>
@@ -64,6 +64,7 @@
 				<g:link url="/sistema-de-eventos/inscricao/create?evento=${eventoInstance.id}" >
 					<p class="btn btn-lg btn-success lead glyphicon glyphicon-pencil">Inscrição</p>
 				</g:link>
+				<p class="" style="color:red">Sua Inscrição Será analisada pelos responsáveis e a confirmação será via email</p>
 				
 			</div>
 			

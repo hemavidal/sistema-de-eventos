@@ -59,10 +59,10 @@
 								<td>${fieldValue(bean: inscricaoInstance, field: "localidadeIgreja")}</td>
 								
 								<g:if test="${inscricaoInstance.isConfirmada}">
-									<td class="glyphicon glyphicon-ok"></td>
+									<td class="glyphicon glyphicon-ok">Confirmada</td>
 								</g:if>
 								<g:else>
-									<td class="glyphicon glyphicon-remove"></td>
+									<td class="glyphicon glyphicon-remove">Pendente</td>
 								</g:else>
 							
 							</tr>

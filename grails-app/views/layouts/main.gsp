@@ -39,9 +39,9 @@
 			</div>
 			<div class="collapse navbar-collapse" id="navigationbar">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="./">Início</a></li>
-					<li><a href="/sistema-de-eventos/evento/index">Eventos</a></li>
+					<li class="active"><a href="/sistema-de-eventos/">Início</a></li>
 					<g:if test="${session?.usuario?.tipo == 'admin'}">
+						<li><a href="/sistema-de-eventos/evento/index">Eventos</a></li>
 						<li><a href="/sistema-de-eventos/pessoa/index">Pessoas</a></li>
 						<li><a href="/sistema-de-eventos/usuario/index">Usuários</a></li>
 						<li><a href="/sistema-de-eventos/inscricao/index">Inscrições</a></li>
@@ -71,7 +71,7 @@
 		<hr>
 
 		<footer>
-			<p>&copy; SofITenG 2014</p>
+			<p>&copy; SofITenG 2014 - Suporte: hemavidal@gmail.com</p>
 		</footer>
 	</div>
 

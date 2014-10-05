@@ -10,7 +10,7 @@
 	    	<g:field type='file' name='pessoa.foto.file' value="${inscricaoInstance?.pessoa?.foto?.file}"/>
 	    </g:if>
 	    <g:else>
-	    	<img class="holder" src="${request.contextPath}/pessoa/displayGraph?id=${inscricaoInstance.pessoa.id}"/>
+	    	<img class="" width="auto" height="100px" src="${request.contextPath}/pessoa/displayGraph?id=${inscricaoInstance?.pessoa?.id}"/>
 	    </g:else>
 	</div>
 </div>
@@ -44,7 +44,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-10">
-		<g:datePicker class="form-control" name="pessoa.dataNascimento" value="${pessoaInstance?.dataNascimento}"
+		<g:datePicker class="form-control" name="pessoa.dataNascimento" value="${inscricaoInstance?.pessoa?.dataNascimento}"
               noSelection="['':'-Selecione-']" precision="day" disabled="${'show'.equals(actionName)}"/>
 	</div>
 
@@ -65,7 +65,7 @@
 		<g:message code="inscricao.sangue.label" default="Sangue" />
 	</label>
 	<div class="col-sm-10">
-		<g:select class="form-control" name="pessoa.sangue" from="${['A+','A-','B+','B-','AB+','AB-','O+','O-']}"  value="${inscricaoInstance?.pessoa?.sexo}" disabled="${'show'.equals(actionName)}"/>
+		<g:select class="form-control" name="pessoa.sangue" from="${['A+','A-','B+','B-','AB+','AB-','O+','O-']}"  value="${inscricaoInstance?.pessoa?.sangue}" disabled="${'show'.equals(actionName)}"/>
 	</div>
 </div>
 
@@ -139,8 +139,9 @@
 	    	<g:field type='file' name='comprovante.file' value="${inscricaoInstance?.comprovante?.file}"/>
 	    </g:if>
 	    <g:else>
-	    	<img class="holder" src="${request.contextPath}/inscricao/displayGraph?id=${inscricaoInstance.id}"/>
+	    	<img class="" width="auto" height="100px" src="${request.contextPath}/inscricao/displayGraph?id=${inscricaoInstance?.id}"/>
 	    </g:else>
+		<p class="" style="color:red">Seu comprovante será analizado pelos responsáveis e a confirmação da inscrição será via EMAIL</p>
 	</div>
 </div>
 

@@ -89,9 +89,29 @@ grails.hibernate.osiv.readonly = false
 environments {
     development {
         grails.logging.jul.usebridge = true
+		grails {
+			mail {
+			  host = "localhost"
+			  user = "hema@hema-pc"
+			  password = "mateus567"
+			  port = 25
+			  props= ["mail.debug":"true"]
+			}
+		 }
     }
     production {
         grails.logging.jul.usebridge = false
+		
+		grails {
+			mail {
+			  host = "sofiteng.com.br"
+			  port = 587
+			  username = "root@sofiteng.com.br"
+			  password = "filhodedeus126366"
+			  props = ["mail.smtp.starttls.enable":"true",
+						   "mail.smtp.port":"587"]
+			}
+		 }
         // TODO: grails.serverURL = "http://www.changeme.com"
     }
 }

@@ -49,7 +49,6 @@ class InscricaoController {
 		}
 		
 		inscricaoInstance.comprovante.nome = comprovante.getOriginalFilename()
-		inscricaoInstance.pessoa.foto.nome = foto.getOriginalFilename()
 		
 		if (inscricaoInstance == null) {
             notFound()
@@ -58,12 +57,6 @@ class InscricaoController {
 		if (inscricaoInstance.pessoa.hasErrors()) {
 			respond inscricaoInstance.pessoa.errors, view:'create'
 			return
-		}
-		
-		if ('M'.equals(inscricaoInstance.pessoa.sexo.getAt(0).toUpperCase())) {
-			inscricaoInstance.pessoa.sexo = 'M'
-		} else {
-			inscricaoInstance.pessoa.sexo = 'F'
 		}
 		
 		if (inscricaoInstance.hasErrors()) {
@@ -104,16 +97,17 @@ class InscricaoController {
     }
 
     @Transactional
-    def update(Inscricao inscricaoInstance) {
-        if (params['pessoa.foto.file']) {
+    def update(Inscricao inscricaoInstance, Pessoa pessoa) {
+//		println "pessoa.properties: (id:$pessoa.id) $pessoa.properties"
+		if (params['pessoa.foto.file']) {
+			println params['pessoa.foto.file']
         	def foto = request.getFile('pessoa.foto.file')
-   			inscricaoInstance.pessoa.foto.nome = foto.getOriginalFilename()
-			
+   			pessoa?.foto?.nome = foto.getOriginalFilename()
+			pessoa?.foto?.save flush:true
 		}
 		
 		if (params['comprovante.file']) {
 			def comprovante = request.getFile('comprovante.file')
-			
 			
 			if (comprovante.empty) {
 				flash.message = 'O envio do comprovante é obrigatório.'
@@ -121,32 +115,29 @@ class InscricaoController {
 				return
 			}
 			inscricaoInstance.comprovante.nome = comprovante.getOriginalFilename()
+			inscricaoInstance?.comprovante?.save flush:true
 		}
 		
 		if (inscricaoInstance == null) {
             notFound()
             return
         }
-		if (inscricaoInstance.pessoa.hasErrors()) {
-			respond inscricaoInstance.pessoa.errors, view:'create'
+		if (pessoa.hasErrors()) {
+			flash.type = 'alert-danger'
+			flash.message = "Erro de validação da pessoa!"
+			println pessoa.errors.properties
+			respond pessoa.errors, view:'edit'
 			return
-		}
-		
-		if ('M'.equals(inscricaoInstance.pessoa.sexo.getAt(0).toUpperCase())) {
-			inscricaoInstance.pessoa.sexo = 'M'
-		} else {
-			inscricaoInstance.pessoa.sexo = 'F'
 		}
 		
 		if (inscricaoInstance.hasErrors()) {
 			flash.type = 'alert-danger'
-			respond inscricaoInstance.errors, view:'create'
+			flash.message = "Erro de validação da inscricao!"
+			respond inscricaoInstance.errors, view:'edit'
 			return
 		}
 		
-		inscricaoInstance.pessoa.foto.save flush:true
-		inscricaoInstance.pessoa.save flush:true
-		inscricaoInstance.comprovante.save flush:true
+		pessoa.save flush:true
 		inscricaoInstance.save flush:true
         
         request.withFormat {
@@ -195,5 +186,21 @@ class InscricaoController {
 		response.contentType = 'image/jpg' // or the appropriate image content type
 		response.outputStream << img
 		response.outputStream.flush()
+	}
+	
+	def confirmarInscricao(Inscricao inscricaoInstance) {
+		inscricaoInstance.isConfirmada = true
+		Evento evento = inscricaoInstance.evento
+		sendMail {
+			to inscricaoInstance.pessoa.email
+			subject "[Sistema de Eventos] Confirmação de Inscrição no evento '${evento.nome}'"
+			body "Olá ${inscricaoInstance.pessoa.nome} sua inscrição no evento '${evento.nome}'\
+                     foi confirmada!\
+					 Nos veremos lá no ${evento.nome}.\
+					 OBS: Email informativo, favor não responder."
+		}
+		flash.type = 'alert-success'
+		flash.message = "Inscrição confirmada com sucesso! Um email de confirmação foi enviado para '${inscricaoInstance.pessoa.email}'"
+		redirect(controller:'evento', action:'show', id: evento.id)
 	}
 }

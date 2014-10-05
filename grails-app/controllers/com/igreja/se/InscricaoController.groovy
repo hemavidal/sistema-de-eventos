@@ -27,12 +27,19 @@ class InscricaoController {
 
     @Transactional
     def save(Inscricao inscricaoInstance) {
-    	inscricaoInstance.dataInscricao = new Date()
-		def foto = request.getFile('pessoa.foto.file')
+		if (params['pessoa.foto.file']) {
+        	def foto = request.getFile('pessoa.foto.file')
+   			inscricaoInstance.pessoa.foto.nome = foto.getOriginalFilename()
+			
+		}
 		
+		if (!params['comprovante.file']) {
+			flash.type = 'alert-danger'
+			flash.message = 'O envio do comprovante é obrigatório.'
+			return
+		}
 		
 		def comprovante = request.getFile('comprovante.file')
-		
 		
 		if (comprovante.empty) {
 			flash.message = 'O envio do comprovante é obrigatório.'
@@ -59,7 +66,6 @@ class InscricaoController {
 			inscricaoInstance.pessoa.sexo = 'F'
 		}
 		
-		
 		if (inscricaoInstance.hasErrors()) {
 			flash.type = 'alert-danger'
 			respond inscricaoInstance.errors, view:'create'
@@ -85,7 +91,7 @@ class InscricaoController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = "Inscrição evetuada com sucesso! :)"
+                flash.message = "Inscrição evetuada com sucesso!"
 				flash.type = "alert-success"
                 redirect inscricaoInstance
             }
@@ -99,35 +105,54 @@ class InscricaoController {
 
     @Transactional
     def update(Inscricao inscricaoInstance) {
-        def foto = request.getFile('pessoa.foto.file')
-		def comprovante = request.getFile('comprovante.file')
-		if (comprovante.empty) {
-			flash.message = 'O envio do comprovante é obrigatório.'
-			flash.type = 'alert-danger'
-			render(view: 'create')
-			return
+        if (params['pessoa.foto.file']) {
+        	def foto = request.getFile('pessoa.foto.file')
+   			inscricaoInstance.pessoa.foto.nome = foto.getOriginalFilename()
+			
 		}
 		
-		inscricaoInstance.comprovante.nome = comprovante.getOriginalFilename()
-		inscricaoInstance.pessoa.foto.nome = foto.getOriginalFilename()
+		if (params['comprovante.file']) {
+			def comprovante = request.getFile('comprovante.file')
+			
+			
+			if (comprovante.empty) {
+				flash.message = 'O envio do comprovante é obrigatório.'
+				flash.type = 'alert-danger'
+				return
+			}
+			inscricaoInstance.comprovante.nome = comprovante.getOriginalFilename()
+		}
 		
 		if (inscricaoInstance == null) {
             notFound()
             return
         }
-		
-		if (inscricaoInstance.hasErrors()) {
-			redirect(action:'create', params:[evento:params.evento])
+		if (inscricaoInstance.pessoa.hasErrors()) {
+			respond inscricaoInstance.pessoa.errors, view:'create'
 			return
 		}
 		
-		chain(controller:'pessoa', action:'save', model:[pessoaInstance: inscricaoInstance?.pessoa])
-        
+		if ('M'.equals(inscricaoInstance.pessoa.sexo.getAt(0).toUpperCase())) {
+			inscricaoInstance.pessoa.sexo = 'M'
+		} else {
+			inscricaoInstance.pessoa.sexo = 'F'
+		}
+		
+		if (inscricaoInstance.hasErrors()) {
+			flash.type = 'alert-danger'
+			respond inscricaoInstance.errors, view:'create'
+			return
+		}
+		
+		inscricaoInstance.pessoa.foto.save flush:true
+		inscricaoInstance.pessoa.save flush:true
+		inscricaoInstance.comprovante.save flush:true
 		inscricaoInstance.save flush:true
-
+        
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Inscricao.label', default: 'Inscricao'), inscricaoInstance.id])
+				flash.type = 'alert-success'
+                flash.message = "Inscrição Alterada!"
                 redirect inscricaoInstance
             }
             '*'{ respond inscricaoInstance, [status: OK] }

@@ -44,8 +44,8 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-10">
-		<g:datePicker class="form-control" name="dataNascimento" value="${pessoaInstance?.dataNascimento}"
-              noSelection="['':'-Selecione-']" disabled="${'show'.equals(actionName)}"/>
+		<g:datePicker class="form-control" name="pessoa.dataNascimento" value="${pessoaInstance?.dataNascimento}"
+              noSelection="['':'-Selecione-']" precision="day" disabled="${'show'.equals(actionName)}"/>
 	</div>
 
 </div>

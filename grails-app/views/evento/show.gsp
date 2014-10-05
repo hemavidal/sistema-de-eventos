@@ -40,7 +40,7 @@
 							
 								<g:sortableColumn property="pessoa" title="${message(code: 'default.pessoa.label', default: 'Pessoa')}" />
 								
-								<g:sortableColumn property="dataInscricao" title="${message(code: 'default.dataInscricao.label', default: 'Data da Inscrição')}" />
+								<g:sortableColumn property="dateCreated" title="${message(code: 'default.dataInscricao.label', default: 'Data da Inscrição')}" />
 								
 								<g:sortableColumn property="localidadeIgreja" title="${message(code: 'default.dataInscricao.label', default: 'Local da Igreja')}" />
 								
@@ -54,7 +54,7 @@
 							
 								<td><g:link controller="inscricao" action="show" id="${inscricaoInstance?.id}">${fieldValue(bean: inscricaoInstance, field: "pessoa")}</g:link></td>
 								
-								<td>${fieldValue(bean: inscricaoInstance, field: "dataInscricao").format('dd/MM/yyyy - HH:mm')}</td>
+								<td><g:formatDate format="dd/MM/yyyy - HH:mm" date="${inscricaoInstance?.dateCreated}"/></td>
 								
 								<td>${fieldValue(bean: inscricaoInstance, field: "localidadeIgreja")}</td>
 								

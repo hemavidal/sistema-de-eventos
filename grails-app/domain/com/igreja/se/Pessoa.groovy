@@ -2,9 +2,6 @@ package com.igreja.se
 
 class Pessoa {
 
-	
-	Imagem foto
-	
 	String email
 	String nome
 	Date dataNascimento
@@ -17,7 +14,6 @@ class Pessoa {
 	String sangue
 	
     static constraints = {
-		foto nullable:true, blank:true
 		nome nullable:false, blank:false
 		sexo inList:['Masculino', 'Feminino'], nullable:false, blank:false
 		email nullable:false, email: true, blank: false

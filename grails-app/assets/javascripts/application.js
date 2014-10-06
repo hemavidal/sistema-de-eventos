@@ -42,23 +42,6 @@ if (typeof jQuery !== 'undefined') {
   }
 })();
 
-function readURLfoto(input) {
-
-	var files = input.files ? input.files : input.currentTarget.files;
-	
-    if (files && files[0]) {
-        
-        
-        var reader = new FileReader();
-		
-        reader.onload = function (e) {
-            $('#fotoImg').attr('src', e.target.result);
-        }
-
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
 function readURLcomprovante(input) {
 
 	var files = input.files ? input.files : input.currentTarget.files;
@@ -75,10 +58,6 @@ function readURLcomprovante(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
-
-$("#fotoInput").change(function(){
-    readURLfoto(this);
-});
 
 $("#comprovanteInput").change(function(){
     readURLcomprovante(this);

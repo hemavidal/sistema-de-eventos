@@ -15,7 +15,7 @@ class LoginAccessFilters {
 			}
 		}
 		
-		restrictAccessOnlyWithAdminUser(controller:'usuario|pessoa', action:'*') {
+		restrictAccessOnlyWithAdminUser(controller:'usuario|pessoa|evento', action:'*') {
 			before = {
 				if (actionName in ['login', 'logout','authenticate', 'displayGraph']) {
 					return true

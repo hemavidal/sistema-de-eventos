@@ -4,13 +4,17 @@ package com.igreja.se
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest
 import org.springframework.web.multipart.commons.CommonsMultipartFile
 
 @Transactional()
 class InscricaoController {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
+	def fileUploadService
+	
+	static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -27,15 +31,10 @@ class InscricaoController {
 
     @Transactional
     def save(Inscricao inscricaoInstance) {
-		if (params['pessoa.foto.file']) {
-        	def foto = request.getFile('pessoa.foto.file')
-   			inscricaoInstance.pessoa.foto.nome = foto.getOriginalFilename()
-			
-		}
-		
 		if (!params['comprovante.file']) {
 			flash.type = 'alert-danger'
 			flash.message = 'O envio do comprovante é obrigatório.'
+			redirect action:'edit'
 			return
 		}
 		
@@ -48,7 +47,14 @@ class InscricaoController {
 			return
 		}
 		
-		inscricaoInstance.comprovante.nome = comprovante.getOriginalFilename()
+		String comprovanteName = inscricaoInstance.pessoa.email +
+			'_inscricao' + inscricaoInstance.id +
+			'_evento' + inscricaoInstance.evento.id +
+ 			'.jpg';
+		
+		fileUploadService.uploadFile(comprovante, comprovanteName, '/comprovantes/')
+		
+		inscricaoInstance.comprovante = comprovanteName
 		
 		if (inscricaoInstance == null) {
             notFound()
@@ -65,15 +71,13 @@ class InscricaoController {
 			return
 		}
 		
-		inscricaoInstance.pessoa.foto.save flush:true
 		inscricaoInstance.pessoa.save flush:true
-		inscricaoInstance.comprovante.save flush:true
 		inscricaoInstance.save flush:true
 		
 		Evento evento = Evento.findById(params.evento)
 		
 		if (!evento) {
-			flash.message = "Inscrição não efetuada devido a um problema de caminho de URL! \n Tente Novamente"
+			flash.message = "Evento não identificado! \n Tente Novamente"
 			flash.type = "alert-danger"
 			return
 		}
@@ -97,32 +101,36 @@ class InscricaoController {
     }
 
     @Transactional
-    def update(Inscricao inscricaoInstance, Pessoa pessoa) {
-		if (params['pessoa.foto.file']) {
-			println "$pessoa.foto"
-        	def foto = request.getFile('pessoa.foto.file')
-   			pessoa?.foto?.nome = foto.getOriginalFilename()
-			pessoa?.foto?.save flush:true
-		}
-		
+    def update(Inscricao inscricaoInstance) {
 		if (params['comprovante.file']) {
 			def comprovante = request.getFile('comprovante.file')
-			println "$comprovante.properties"
 			
 			if (comprovante.empty) {
 				flash.message = 'O envio do comprovante é obrigatório.'
 				flash.type = 'alert-danger'
+				respond inscricaoInstance, view:'edit'
 				return
 			}
-			inscricaoInstance.comprovante.nome = comprovante.getOriginalFilename()
-			inscricaoInstance?.comprovante?.save flush:true
+			
+			//Delete old file
+			new File('/comprovantes/' + inscricaoInstance.comprovante).delete()
+			
+			String comprovanteName = inscricaoInstance.pessoa.email +
+			'_inscricao' + inscricaoInstance.id +
+			'_evento' + inscricaoInstance.evento.id +
+ 			'.jpg';
+
+			fileUploadService.uploadFile(comprovante, comprovanteName, '/comprovantes/')
+			
+			inscricaoInstance.comprovante = comprovanteName
 		}
 		
 		if (inscricaoInstance == null) {
             notFound()
             return
         }
-		if (pessoa.hasErrors()) {
+		
+		if (inscricaoInstance.pessoa.hasErrors()) {
 			flash.type = 'alert-danger'
 			flash.message = "Erro de validação da pessoa!"
 			println pessoa.errors.properties
@@ -137,7 +145,7 @@ class InscricaoController {
 			return
 		}
 		
-		pessoa.save flush:true
+		inscricaoInstance.pessoa.save flush:true
 		inscricaoInstance.save flush:true
         
         request.withFormat {
@@ -194,22 +202,10 @@ class InscricaoController {
 		
 	}
 	
-	def uploadComprovante(Inscricao inscricaoInstance) {
-		def file = request.getFile('comprovante.file')
-		
-		if (file.empty) {
-			flash.message = 'file cannot be empty'
-			render(view: 'create')
-			return
-		}
-		flash.type = 'alert-warning'
-		flash.message = 'A foto foi enviada!'
-		redirect action:'edit', id:inscricaoInstance.id
-		
-	}
-	
 	def displayGraph = {
-		def img = Inscricao.findById(params.id)?.comprovante?.file // byte array
+		Inscricao inscricao = Inscricao.findById(params.id) 
+		def img = inscricao.comprovante.file // byte array
+		
 		//...
 //		response.setHeader('Content-length', img.length)
 		response.contentType = 'image/jpg' // or the appropriate image content type

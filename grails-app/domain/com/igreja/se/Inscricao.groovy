@@ -6,7 +6,7 @@ class Inscricao {
 	
 	String pastorResponsavel
 
-	Imagem comprovante
+	String comprovante
 	
 	boolean isConfirmada
 	

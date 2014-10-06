@@ -101,13 +101,4 @@ class PessoaController {
             '*'{ render status: NOT_FOUND }
         }
     }
-	
-	def displayGraph = {
-		def img = Pessoa.findById(params.id)?.foto?.file // byte array
-
-//		response.setHeader('Content-length', img.length)
-		response.contentType = 'image/jpg' // or the appropriate image content type
-		response.outputStream << img
-		response.outputStream.flush()
-	}
 }

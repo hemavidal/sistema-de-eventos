@@ -1,21 +1,6 @@
 <%@ page import="com.igreja.se.Inscricao" %>
 <%@ page import="com.igreja.se.Evento" %>
 
-<div class="form-group  ${hasErrors(bean: pessoaInstance, field: 'foto', 'error')} ">
-	<label for="foto" class="col-sm-2 control-label" >
-		<g:message code="pessoa.foto.label" default="Foto"/>
-	</label>
-	<div class="col-sm-10">
-		<g:if test="${actionName in ['create', 'edit', 'save']}">
-    		<img id="fotoImg" class="" width="auto" height="100px" src="${request.contextPath}/pessoa/displayGraph?id=${inscricaoInstance?.pessoa?.id}"/>
-    		<g:field id="fotoInput" type='file' name='pessoa.foto.file' value="${inscricaoInstance?.pessoa?.foto?.file}"/>
-	    </g:if>
-	    <g:else>
-	    	<img id="fotoImg" class="" width="auto" height="100px" src="${request.contextPath}/pessoa/displayGraph?id=${inscricaoInstance?.pessoa?.id}"/>
-	    </g:else>
-	</div>
-</div>
-
 <div class="form-group ${hasErrors(bean: pessoaInstance, field: 'email', 'error')} required">
 	<label for="email" class="col-sm-2 control-label">
 		<g:message code="inscricao.nome.label" default="Email" />
@@ -24,7 +9,6 @@
 	<div class="col-sm-10">
 		<g:textField class="form-control" type="email" name="pessoa.email" required="" value="${inscricaoInstance?.pessoa?.email}" disabled="${'show'.equals(actionName)}"/>
 	</div>
-
 </div>
 
 
@@ -137,11 +121,11 @@
 	</label>
 	<div class="col-sm-10">
 		<g:if test="${actionName in ['create','edit', 'save']}">
-	    	<img id="comprovanteImg" class="" width="auto" height="100px" src="${request.contextPath}/inscricao/displayGraph?id=${inscricaoInstance?.id}"/>
-	    	<g:field id="comprovanteInput" type='file' name='comprovante.file' value="${inscricaoInstance?.comprovante?.file}"/>
+	    	<img id="comprovanteImg" class="" width="auto" height="100px" src="${resource(dir:'comprovantes', file:fieldValue(bean:inscricaoInstance, field:'comprovante'))}"/>
+	    	<g:field id="comprovanteInput" type='file' name='comprovante.file'/>
 	    </g:if>
 	    <g:else>
-	    	<img id="comprovanteImg" class="" width="auto" height="100px" src="${request.contextPath}/inscricao/displayGraph?id=${inscricaoInstance?.id}"/>
+	    	<img id="comprovanteImg" class="" width="auto" height="100px" src="${resource(dir:'comprovantes', file:fieldValue(bean:inscricaoInstance, field:'comprovante'))}"/>
 	    </g:else>
 		<p class="" style="color:red">Seu comprovante será analizado pelos responsáveis e a confirmação da inscrição será via EMAIL</p>
 	</div>

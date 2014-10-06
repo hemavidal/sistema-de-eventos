@@ -7,10 +7,10 @@ import grails.transaction.Transactional
 import org.springframework.web.multipart.MultipartHttpServletRequest
 import org.springframework.web.multipart.commons.CommonsMultipartFile
 
-@Transactional(readOnly = true)
+@Transactional()
 class InscricaoController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -98,9 +98,8 @@ class InscricaoController {
 
     @Transactional
     def update(Inscricao inscricaoInstance, Pessoa pessoa) {
-//		println "pessoa.properties: (id:$pessoa.id) $pessoa.properties"
 		if (params['pessoa.foto.file']) {
-			println params['pessoa.foto.file']
+			println "$pessoa.foto"
         	def foto = request.getFile('pessoa.foto.file')
    			pessoa?.foto?.nome = foto.getOriginalFilename()
 			pessoa?.foto?.save flush:true
@@ -108,6 +107,7 @@ class InscricaoController {
 		
 		if (params['comprovante.file']) {
 			def comprovante = request.getFile('comprovante.file')
+			println "$comprovante.properties"
 			
 			if (comprovante.empty) {
 				flash.message = 'O envio do comprovante é obrigatório.'
@@ -157,7 +157,7 @@ class InscricaoController {
             notFound()
             return
         }
-
+		
         inscricaoInstance.delete flush:true
 
         request.withFormat {
@@ -179,8 +179,37 @@ class InscricaoController {
         }
     }
 	
+	def uploadFoto(Inscricao inscricaoInstance) {
+		def file = request.getFile('pessoa.foto.file')
+		
+		if (file.empty) {
+			flash.type = 'alert-warning'
+			flash.message = 'Escolha uma foto!'
+			redirect action:'edit', id:inscricaoInstance.id
+			return
+		}
+		flash.type = 'alert-warning'
+		flash.message = 'A foto foi enviada!'
+		redirect action:'edit', id:inscricaoInstance.id
+		
+	}
+	
+	def uploadComprovante(Inscricao inscricaoInstance) {
+		def file = request.getFile('comprovante.file')
+		
+		if (file.empty) {
+			flash.message = 'file cannot be empty'
+			render(view: 'create')
+			return
+		}
+		flash.type = 'alert-warning'
+		flash.message = 'A foto foi enviada!'
+		redirect action:'edit', id:inscricaoInstance.id
+		
+	}
+	
 	def displayGraph = {
-		def img = Inscricao.findById(params.id).comprovante.file // byte array
+		def img = Inscricao.findById(params.id)?.comprovante?.file // byte array
 		//...
 //		response.setHeader('Content-length', img.length)
 		response.contentType = 'image/jpg' // or the appropriate image content type

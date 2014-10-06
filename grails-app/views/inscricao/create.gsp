@@ -7,8 +7,6 @@
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		
-		
 		<div id="create-inscricao" class="content scaffold-create" role="main">
 			<h1><g:message code="default.create.label" args="[entityName]" /></h1>
 			<h3><g:link controller="evento" action="show" id="${params.evento}"> <g:message code="Evento: ${Evento.findById(params.evento).nome}" /> </g:link> </h3>

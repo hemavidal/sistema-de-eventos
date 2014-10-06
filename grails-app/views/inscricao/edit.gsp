@@ -24,12 +24,12 @@
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
-			<g:form action="update" id="${inscricaoInstance.id}" method="post" enctype="multipart/form-data" >
+			<g:form action="update" method="post" id="${inscricaoInstance.id}" enctype="multipart/form-data">
 				<fieldset class="form-horizontal">
 					<g:render template="form"/>
 				</fieldset>
 				<fieldset class="buttons">
-					<g:actionSubmit name="update" class="save btn btn-success" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+					<g:submitButton name="update" class="save btn btn-success" value="${message(code: 'default.button.update.label', default: 'Update')}" />
 				</fieldset>
 			</g:form>
 		</div>

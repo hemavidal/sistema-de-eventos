@@ -12,6 +12,44 @@
       <script src="../../assets/js/html5shiv.js"></script>
       <script src="../../assets/js/respond.min.js"></script>
     <![endif]-->
+    <style type="text/css">
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+    
+    </style>
 </head>
 <body>
 	<div class="container">
@@ -29,7 +67,7 @@
 
 				<g:form class="form-signin" role="form"
 					url="[controller:'usuario', action:'authenticate']">
-					<h2 class="form-signin-heading">Please sign in</h2>
+					<h2 class="form-signin-heading">Acesso ao Sistema de Eventos</h2>
 					<input type="email" class="form-control" name="login"
 						placeholder="Email address" required autofocus>
 					<input type="password" class="form-control" name="senha" placeholder="Senha" 

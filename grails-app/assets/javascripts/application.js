@@ -20,11 +20,10 @@ if (typeof jQuery !== 'undefined') {
 	})(jQuery);
 }
 
-/*!
- * IE10 viewport hack for Surface/desktop Windows 8 bug
- * Copyright 2014 Twitter, Inc.
- * Licensed under the Creative Commons Attribution 3.0 Unported License. For
- * details, see http://creativecommons.org/licenses/by/3.0/.
+/*
+ * ! IE10 viewport hack for Surface/desktop Windows 8 bug Copyright 2014
+ * Twitter, Inc. Licensed under the Creative Commons Attribution 3.0 Unported
+ * License. For details, see http://creativecommons.org/licenses/by/3.0/.
  */
 
 // See the Getting Started docs for more information:
@@ -42,3 +41,45 @@ if (typeof jQuery !== 'undefined') {
     document.querySelector('head').appendChild(msViewportStyle)
   }
 })();
+
+function readURLfoto(input) {
+
+	var files = input.files ? input.files : input.currentTarget.files;
+	
+    if (files && files[0]) {
+        
+        
+        var reader = new FileReader();
+		
+        reader.onload = function (e) {
+            $('#fotoImg').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function readURLcomprovante(input) {
+
+	var files = input.files ? input.files : input.currentTarget.files;
+	
+    if (files && files[0]) {
+        
+        
+        var reader = new FileReader();
+		
+        reader.onload = function (e) {
+            $('#comprovanteImg').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$("#fotoInput").change(function(){
+    readURLfoto(this);
+});
+
+$("#comprovanteInput").change(function(){
+    readURLcomprovante(this);
+});

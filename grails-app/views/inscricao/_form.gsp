@@ -7,10 +7,11 @@
 	</label>
 	<div class="col-sm-10">
 		<g:if test="${actionName in ['create', 'edit', 'save']}">
-	    	<g:field type='file' name='pessoa.foto.file' value="${inscricaoInstance?.pessoa?.foto?.file}"/>
+    		<img id="fotoImg" class="" width="auto" height="100px" src="${request.contextPath}/pessoa/displayGraph?id=${inscricaoInstance?.pessoa?.id}"/>
+    		<g:field id="fotoInput" type='file' name='pessoa.foto.file' value="${inscricaoInstance?.pessoa?.foto?.file}"/>
 	    </g:if>
 	    <g:else>
-	    	<img class="" width="auto" height="100px" src="${request.contextPath}/pessoa/displayGraph?id=${inscricaoInstance?.pessoa?.id}"/>
+	    	<img id="fotoImg" class="" width="auto" height="100px" src="${request.contextPath}/pessoa/displayGraph?id=${inscricaoInstance?.pessoa?.id}"/>
 	    </g:else>
 	</div>
 </div>
@@ -135,11 +136,12 @@
 		<g:message code="inscricao.comprovante.label" default="Comprovante de Transferência"/>
 	</label>
 	<div class="col-sm-10">
-		<g:if test="${actionName in ['create', 'edit', 'save']}">
-	    	<g:field type='file' name='comprovante.file' value="${inscricaoInstance?.comprovante?.file}"/>
+		<g:if test="${actionName in ['create','edit', 'save']}">
+	    	<img id="comprovanteImg" class="" width="auto" height="100px" src="${request.contextPath}/inscricao/displayGraph?id=${inscricaoInstance?.id}"/>
+	    	<g:field id="comprovanteInput" type='file' name='comprovante.file' value="${inscricaoInstance?.comprovante?.file}"/>
 	    </g:if>
 	    <g:else>
-	    	<img class="" width="auto" height="100px" src="${request.contextPath}/inscricao/displayGraph?id=${inscricaoInstance?.id}"/>
+	    	<img id="comprovanteImg" class="" width="auto" height="100px" src="${request.contextPath}/inscricao/displayGraph?id=${inscricaoInstance?.id}"/>
 	    </g:else>
 		<p class="" style="color:red">Seu comprovante será analizado pelos responsáveis e a confirmação da inscrição será via EMAIL</p>
 	</div>

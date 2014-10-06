@@ -103,7 +103,7 @@ class PessoaController {
     }
 	
 	def displayGraph = {
-		def img = Pessoa.findById(params.id).foto.file // byte array
+		def img = Pessoa.findById(params.id)?.foto?.file // byte array
 
 //		response.setHeader('Content-length', img.length)
 		response.contentType = 'image/jpg' // or the appropriate image content type

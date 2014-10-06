@@ -102,7 +102,7 @@ class InscricaoController {
 
     @Transactional
     def update(Inscricao inscricaoInstance) {
-		if (params['comprovante.file']) {
+		if (params['comprovante.file'].bytes.size() != 0) {
 			def comprovante = request.getFile('comprovante.file')
 			
 			if (comprovante.empty) {

@@ -11,7 +11,7 @@ class EventoFilters {
             before = {
 				Usuario usuario = session.usuario
 				if (!'admin'.equals(usuario.tipo)) {
-					redirect(action:"index")
+					redirect(url:'/')
 					return false
 				}
             }

@@ -23,13 +23,13 @@ class LoginAccessFilters {
 				
 				Usuario usuario = session?.usuario
 				if (!usuario) {
-					redirect(controller:"evento", action:"index")
+					redirect(url:'/')
 					return false
 				} else {
 					if (!usuario.tipo.equals('admin')) {
 						flash.message = "Usuário sem permissão."
 						flash.type = "alert-warning"
-						redirect(controller:"evento", action:"index")
+						redirect(url:'/')
 						return false
 					}
 				}

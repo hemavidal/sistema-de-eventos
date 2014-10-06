@@ -91,11 +91,14 @@ environments {
         grails.logging.jul.usebridge = true
 		grails {
 			mail {
-			  host = "localhost"
-			  user = "hema@hema-pc"
-			  password = "mateus567"
-			  port = 25
-			  props= ["mail.debug":"true"]
+				 host = "smtp.gmail.com"
+			     port = 465
+			     username = "sistemadeeventoscampina@gmail.com"
+			     password = "mateus567"
+			     props = ["mail.smtp.auth":"true", 					   
+			              "mail.smtp.socketFactory.port":"465",
+			              "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+			              "mail.smtp.socketFactory.fallback":"false"]
 			}
 		 }
     }
@@ -104,12 +107,14 @@ environments {
 		
 		grails {
 			mail {
-			  host = "sofiteng.com.br"
-			  port = 587
-			  username = "root@sofiteng.com.br"
-			  password = "filhodedeus126366"
-			  props = ["mail.smtp.starttls.enable":"true",
-						   "mail.smtp.port":"587"]
+				 host = "smtp.gmail.com"
+			     port = 465
+			     username = "sistemadeeventoscampina@gmail.com"
+			     password = "mateus567"
+			     props = ["mail.smtp.auth":"true", 					   
+			              "mail.smtp.socketFactory.port":"465",
+			              "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+			              "mail.smtp.socketFactory.fallback":"false"]
 			}
 		 }
         // TODO: grails.serverURL = "http://www.changeme.com"

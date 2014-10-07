@@ -47,7 +47,7 @@ class InscricaoController {
 			return
 		}
 		
-		if (!isImage(comprovante.getOriginalFilename())) {
+		if (!fileUploadService.isImage(comprovante.getOriginalFilename())) {
 			flash.message = "O comprovante precisa ser uma imagem('.tif','.png','.gif','.tiff', '.jpg', 'jpeg','.bmp')"
 			flash.type = 'alert-danger'
 			respond inscricaoInstance, view:'edit'
@@ -87,7 +87,7 @@ class InscricaoController {
 		
 		String comprovanteName = inscricaoInstance.pessoa.email +
 		'_inscricao' + inscricaoInstance.id +
-		'_evento' + inscricaoInstance.evento.id + getExtensao(comprovante.getOriginalFilename());
+		'_evento' + inscricaoInstance.evento.id + fileUploadService.getExtensao(comprovante.getOriginalFilename());
 	
 		fileUploadService.uploadFile(comprovante, comprovanteName, '/comprovantes/')
 		
@@ -120,7 +120,7 @@ class InscricaoController {
 				return
 			}
 			
-			if (!isImage(comprovante.getOriginalFilename())) {
+			if (!fileUploadService.isImage(comprovante.getOriginalFilename())) {
 				flash.message = "O comprovante precisa ser uma imagem('.tif','.png','.gif','.tiff', '.jpg', 'jpeg','.bmp')"
 				flash.type = 'alert-danger'
 				respond inscricaoInstance, view:'edit'
@@ -132,7 +132,7 @@ class InscricaoController {
 			
 			String comprovanteName = inscricaoInstance.pessoa.email +
 				'_inscricao' + inscricaoInstance.id +
-				'_evento' + inscricaoInstance.evento.id + getExtensao(comprovante.getOriginalFilename());
+				'_evento' + inscricaoInstance.evento.id + fileUploadService.getExtensao(comprovante.getOriginalFilename());
 
 			fileUploadService.uploadFile(comprovante, comprovanteName, '/comprovantes/')
 			
@@ -220,17 +220,6 @@ class InscricaoController {
 		
 	}
 	
-	def displayGraph = {
-		Inscricao inscricao = Inscricao.findById(params.id) 
-		def img = inscricao.comprovante.file // byte array
-		
-		//...
-//		response.setHeader('Content-length', img.length)
-		response.contentType = 'image/jpg' // or the appropriate image content type
-		response.outputStream << img
-		response.outputStream.flush()
-	}
-	
 	def confirmarInscricao(Inscricao inscricaoInstance) {
 		inscricaoInstance.isConfirmada = true
 		Evento evento = inscricaoInstance.evento
@@ -243,19 +232,4 @@ class InscricaoController {
 		flash.message = "Inscrição confirmada com sucesso! Um email de confirmação foi enviado para '${inscricaoInstance.pessoa.email}'"
 		redirect(controller:'evento', action:'show', id: evento.id)
 	}
-	
-	private getExtensao(String file) {
-		println file
-		def pontoIndex = file.lastIndexOf('.')
-		println file[pontoIndex .. file.size()-1]
-		return file[pontoIndex .. file.size()-1]
-	}
-	
-	private boolean isImage(String entryName){
-		entryName = entryName.toLowerCase()
-		return entryName.endsWith(".tif") || entryName.endsWith(".png") ||
-			entryName.endsWith(".gif") || entryName.endsWith(".tiff") ||
-			entryName.endsWith(".jpg") || entryName.endsWith(".jpeg") ||
-			entryName.endsWith(".bmp")
-	  }
 }

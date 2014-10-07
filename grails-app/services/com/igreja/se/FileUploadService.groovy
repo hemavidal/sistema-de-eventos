@@ -1,6 +1,7 @@
 package com.igreja.se
 
 import grails.transaction.Transactional
+
 import org.springframework.web.multipart.MultipartFile
 import org.codehaus.groovy.grails.web.context.ServletContextHolder as SCH
 
@@ -37,4 +38,19 @@ class FileUploadService {
             return null
         }
     }
+	  
+	  def String getExtensao(file) {
+		  println file
+		  def pontoIndex = file.lastIndexOf('.')
+		  println file[pontoIndex .. file.size()-1]
+		  return file[pontoIndex .. file.size()-1]
+	  }
+	  
+	  def boolean isImage(String entryName){
+		  entryName = entryName.toLowerCase()
+		  return entryName.endsWith(".tif") || entryName.endsWith(".png") ||
+			  entryName.endsWith(".gif") || entryName.endsWith(".tiff") ||
+			  entryName.endsWith(".jpg") || entryName.endsWith(".jpeg") ||
+			  entryName.endsWith(".bmp")
+		}
 }

@@ -219,10 +219,7 @@ class InscricaoController {
 		sendMail {
 			to inscricaoInstance.pessoa.email
 			subject "[Sistema de Eventos] Confirmação de Inscrição no evento '${evento.nome}'"
-			body "Olá ${inscricaoInstance.pessoa.nome} sua inscrição no evento '${evento.nome}'\
-                     foi confirmada!\
-					 Nos veremos lá no ${evento.nome}.\
-					 OBS: Email informativo, favor não responder."
+			html "<p>Olá ${inscricaoInstance.pessoa.nome} sua inscrição no evento '${evento.nome}' foi confirmada! Nos veremos lá no ${evento.nome}.</p>"
 		}
 		flash.type = 'alert-success'
 		flash.message = "Inscrição confirmada com sucesso! Um email de confirmação foi enviado para '${inscricaoInstance.pessoa.email}'"

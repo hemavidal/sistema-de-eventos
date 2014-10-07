@@ -47,13 +47,6 @@ class InscricaoController {
 			return
 		}
 		
-		String comprovanteName = inscricaoInstance.pessoa.email +
-			'_inscricao' + inscricaoInstance.id +
-			'_evento' + inscricaoInstance.evento.id +
- 			'.jpg';
-		
-		fileUploadService.uploadFile(comprovante, comprovanteName, '/comprovantes/')
-		
 		inscricaoInstance.comprovante = comprovanteName
 		
 		if (inscricaoInstance == null) {
@@ -86,6 +79,13 @@ class InscricaoController {
 		
 		evento.save flush:true
 
+		String comprovanteName = inscricaoInstance.pessoa.email +
+		'_inscricao' + inscricaoInstance.id +
+		'_evento' + inscricaoInstance.evento.id +
+		 '.jpg';
+	
+		fileUploadService.uploadFile(comprovante, comprovanteName, '/comprovantes/')
+		
         request.withFormat {
             form multipartForm {
                 flash.message = "Inscrição evetuada com sucesso!"

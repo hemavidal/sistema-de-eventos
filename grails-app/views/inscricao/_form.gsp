@@ -121,7 +121,7 @@
 	</label>
 	<div class="col-sm-10">
 		<g:if test="${actionName in ['create','edit', 'save']}">
-	    	<img id="comprovanteImg" class="" width="auto" height="100px" src="${resource(dir:'comprovantes', file:fieldValue(bean:inscricaoInstance, field:'comprovante'))}"/>
+	    	<img id="comprovanteImg" class="" width="auto" height="100px" src=""/>
 	    	<g:field id="comprovanteInput" type='file' name='comprovante.file'/>
 	    </g:if>
 	    <g:else>

@@ -2,22 +2,24 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: usuarioInstance, field: 'login', 'error')} required">
-	<label for="login">
+<div class="form-group ${hasErrors(bean: usuarioInstance, field: 'login', 'error')} required">
+	<label for="login" class="col-sm-2 control-label">
 		<g:message code="usuario.login.label" default="Email" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="login" required="" value="${usuarioInstance?.login}"/>
-
+	<div class="col-sm-10">
+		<g:textField class="form-control" name="login" required="" value="${usuarioInstance?.login}"/>
+	</div>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: usuarioInstance, field: 'senha', 'error')} required">
-	<label for="senha">
+<div class="form-group ${hasErrors(bean: usuarioInstance, field: 'senha', 'error')} required">
+	<label for="senha" class="col-sm-2 control-label">
 		<g:message code="usuario.senha.label" default="Senha" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="senha" required="" value="${usuarioInstance?.senha}"/>
-
+	<div class="col-sm-10">
+		<g:textField class="form-control" type='password' name="senha" required="" value="${actionName.equals('create')? usuarioInstance?.senha : ''}" disabled="${!'create'.equals(actionName)}"/>
+	</div>
 </div>
 
 <div class="form-group ${hasErrors(bean: pessoaInstance, field: 'email', 'error')} required">
@@ -26,7 +28,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-10">
-		<g:textField class="form-control" type="email" name="pessoa.email" required="" value="${inscricaoInstance?.pessoa?.email}" disabled="${'show'.equals(actionName)}"/>
+		<g:textField class="form-control" type="email" name="pessoa.email" required="" value="${usuarioInstance?.pessoa?.email}" disabled="${'show'.equals(actionName)}"/>
 	</div>
 
 </div>
@@ -38,18 +40,19 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-10">
-		<g:textField class="form-control" name="pessoa.nome" required="" value="${inscricaoInstance?.pessoa?.nome}" disabled="${'show'.equals(actionName)}"/>
+		<g:textField class="form-control" name="pessoa.nome" required="" value="${usuarioInstance?.pessoa?.nome}" disabled="${'show'.equals(actionName)}"/>
 	</div>
 
 </div>
 
-<div class="form-group ${hasErrors(bean: pessoaInstance, field: 'idade', 'error')} required">
-	<label for="idade" class="col-sm-2 control-label">
-		<g:message code="inscricao.idade.label" default="Idade" />
+<div class="form-group ${hasErrors(bean: pessoaInstance, field: 'dataNascimento', 'error')} required">
+	<label for="dataNascimento" class="col-sm-2 control-label">
+		<g:message code="inscricao.dataNascimento.label" default="Data de Nascimento" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-10">
-		<g:field class="form-control" name="pessoa.idade" type="number" value="${inscricaoInstance?.pessoa?.idade}" required="" disabled="${'show'.equals(actionName)}"/>
+		<g:datePicker class="form-control" name="pessoa.dataNascimento" value="${usuario?.pessoa?.dataNascimento}"
+              noSelection="['':'-Selecione-']" precision="day" disabled="${!'create'.equals(actionName)}"/>
 	</div>
 
 </div>
@@ -60,7 +63,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-10">
-		<g:select class="form-control" name="pessoa.sexo" from="${['M', 'F']}" required="" value="${inscricaoInstance?.pessoa?.sexo}" disabled="${'show'.equals(actionName)}"/>
+		<g:select class="form-control" name="pessoa.sexo" from="${['M', 'F']}" required="" value="${usuarioInstance?.pessoa?.sexo}" disabled="${'show'.equals(actionName)}"/>
 	</div>
 </div>
 
@@ -70,7 +73,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-10">
-		<g:textField class="form-control" name="pessoa.cidade" required="" value="${inscricaoInstance?.pessoa?.cidade}" disabled="${'show'.equals(actionName)}"/>
+		<g:textField class="form-control" name="pessoa.cidade" required="" value="${usuarioInstance?.pessoa?.cidade}" disabled="${'show'.equals(actionName)}"/>
 	</div>
 </div>
 
@@ -80,7 +83,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-10">
-		<g:textField class="form-control" name="pessoa.estado" required="" value="${inscricaoInstance?.pessoa?.estado}" disabled="${'show'.equals(actionName)}"/>
+		<g:textField class="form-control" name="pessoa.estado" required="" value="${usuarioInstance?.pessoa?.estado}" disabled="${'show'.equals(actionName)}"/>
 	</div>
 </div>
 
@@ -90,16 +93,6 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-10">
-		<g:textField class="form-control" name="pessoa.pais" required="" value="${inscricaoInstance?.pessoa?.pais}" disabled="${'show'.equals(actionName)}"/>
-	</div>
-</div>
-
-<div class="form-group ${hasErrors(bean: inscricaoInstance, field: 'pastorResponsavel', 'error')} required">
-	<label for="pais" class="col-sm-2 control-label">
-		<g:message code="inscricao.pastorResponsavel.label" default="Pastor Responsavel" />
-		<span class="required-indicator">*</span>
-	</label>
-	<div class="col-sm-10">
-		<g:textField class="form-control" name="pastorResponsavel" required="" value="${inscricaoInstance?.pastorResponsavel}" disabled="${'show'.equals(actionName)}"/>
+		<g:textField class="form-control" name="pessoa.pais" required="" value="${usuarioInstance?.pessoa?.pais}" disabled="${'show'.equals(actionName)}"/>
 	</div>
 </div>

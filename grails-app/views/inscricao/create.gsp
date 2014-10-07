@@ -30,6 +30,7 @@
 					<g:render template="form"/>
 				</fieldset>
 				<fieldset class="buttons">
+					<g:link class="edit btn btn-primary" url="/sistema-de-eventos"><g:message code="default.button.cancel.label" default="Cancelar" /></g:link>
 					<g:submitButton name="create" class="save btn btn-success" value="${message(code: 'default.button.create.label', default: 'Create')}" />
 				</fieldset>
 			</g:form>

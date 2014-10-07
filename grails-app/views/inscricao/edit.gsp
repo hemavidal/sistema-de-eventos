@@ -29,6 +29,7 @@
 					<g:render template="form"/>
 				</fieldset>
 				<fieldset class="buttons">
+					<g:link class="edit btn btn-primary" action="show" resource="${inscricaoInstance}"><g:message code="default.button.cancel.label" default="Cancelar" /></g:link>
 					<g:submitButton name="update" class="save btn btn-success" value="${message(code: 'default.button.update.label', default: 'Update')}" />
 				</fieldset>
 			</g:form>

@@ -120,8 +120,8 @@
 		<g:message code="inscricao.comprovante.label" default="Comprovante de Transferência"/>
 	</label>
 	<div class="col-sm-10">
-		<g:if test="${actionName in ['create','edit', 'save']}">
-	    	<img id="comprovanteImg" class="" width="auto" height="100px" src=""/>
+		<g:if test="${actionName in ['create','save', 'edit', 'update']}">
+	    	<img id="comprovanteImg" class="" width="auto" height="100px"  src="${resource(dir:'comprovantes', file:fieldValue(bean:inscricaoInstance, field:'comprovante')).isEmpty() ? resource(dir:'comprovantes', file:fieldValue(bean:inscricaoInstance, field:'comprovante')) : resource(dir:'assets/images', file:'comprovante-default.png')}"/>
 	    	<g:field id="comprovanteInput" type='file' name='comprovante.file'/>
 	    </g:if>
 	    <g:else>

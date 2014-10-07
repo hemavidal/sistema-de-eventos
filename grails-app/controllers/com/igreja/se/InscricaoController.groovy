@@ -47,7 +47,12 @@ class InscricaoController {
 			return
 		}
 		
-		inscricaoInstance.comprovante = comprovanteName
+		if (!isImage(comprovante.getOriginalFilename())) {
+			flash.message = "O comprovante precisa ser uma imagem('.tif','.png','.gif','.tiff', '.jpg', 'jpeg','.bmp')"
+			flash.type = 'alert-danger'
+			respond inscricaoInstance, view:'edit'
+			return
+		}
 		
 		if (inscricaoInstance == null) {
             notFound()
@@ -78,17 +83,20 @@ class InscricaoController {
 		evento.addToInscricoes(inscricaoInstance)
 		
 		evento.save flush:true
-
+		
+		
 		String comprovanteName = inscricaoInstance.pessoa.email +
 		'_inscricao' + inscricaoInstance.id +
-		'_evento' + inscricaoInstance.evento.id +
-		 '.jpg';
+		'_evento' + inscricaoInstance.evento.id + getExtensao(comprovante.getOriginalFilename());
 	
 		fileUploadService.uploadFile(comprovante, comprovanteName, '/comprovantes/')
 		
+		inscricaoInstance.comprovante = comprovanteName
+		inscricaoInstance.save flush:true
+		
         request.withFormat {
             form multipartForm {
-                flash.message = "Inscrição evetuada com sucesso!"
+                flash.message = "Inscrição evetuada com sucesso! Espere o email de confirmação!"
 				flash.type = "alert-success"
                 redirect inscricaoInstance
             }
@@ -112,18 +120,25 @@ class InscricaoController {
 				return
 			}
 			
+			if (!isImage(comprovante.getOriginalFilename())) {
+				flash.message = "O comprovante precisa ser uma imagem('.tif','.png','.gif','.tiff', '.jpg', 'jpeg','.bmp')"
+				flash.type = 'alert-danger'
+				respond inscricaoInstance, view:'edit'
+				return
+			}
+			
 			//Delete old file
 			new File('/comprovantes/' + inscricaoInstance.comprovante).delete()
 			
 			String comprovanteName = inscricaoInstance.pessoa.email +
-			'_inscricao' + inscricaoInstance.id +
-			'_evento' + inscricaoInstance.evento.id +
- 			'.jpg';
+				'_inscricao' + inscricaoInstance.id +
+				'_evento' + inscricaoInstance.evento.id + getExtensao(comprovante.getOriginalFilename());
 
 			fileUploadService.uploadFile(comprovante, comprovanteName, '/comprovantes/')
 			
 			inscricaoInstance.comprovante = comprovanteName
 		}
+		
 		
 		if (inscricaoInstance == null) {
             notFound()
@@ -165,6 +180,9 @@ class InscricaoController {
             notFound()
             return
         }
+		
+		//Delete old file
+		new File('/comprovantes/' + inscricaoInstance.comprovante).delete()
 		
         inscricaoInstance.delete flush:true
 
@@ -225,4 +243,19 @@ class InscricaoController {
 		flash.message = "Inscrição confirmada com sucesso! Um email de confirmação foi enviado para '${inscricaoInstance.pessoa.email}'"
 		redirect(controller:'evento', action:'show', id: evento.id)
 	}
+	
+	private getExtensao(String file) {
+		println file
+		def pontoIndex = file.lastIndexOf('.')
+		println file[pontoIndex .. file.size()-1]
+		return file[pontoIndex .. file.size()-1]
+	}
+	
+	private boolean isImage(String entryName){
+		entryName = entryName.toLowerCase()
+		return entryName.endsWith(".tif") || entryName.endsWith(".png") ||
+			entryName.endsWith(".gif") || entryName.endsWith(".tiff") ||
+			entryName.endsWith(".jpg") || entryName.endsWith(".jpeg") ||
+			entryName.endsWith(".bmp")
+	  }
 }

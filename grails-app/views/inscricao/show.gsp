@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'inscricao.label', default: 'Inscricao')}" />
+		<g:set var="entityName" value="Inscrição" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
 	<body>
@@ -22,13 +22,15 @@
 				<fieldset class="form-horizontal">
 					<g:render template="form"/>
 				</fieldset>
-				<g:if test="${session?.usuario?.tipo?.equals('admin')}">
+				
 					<fieldset class="buttons">
-						<g:link class="edit btn btn-warning" action="edit" resource="${inscricaoInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-						<g:actionSubmit class="delete btn btn-danger" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-						<g:link class="edit btn btn-primary" action="confirmarInscricao" resource="${inscricaoInstance}"><g:message code="default.button.confirmarInscricao.label" default="Confirmar Inscrição" /></g:link>
+						<g:link class="edit btn btn-warning" url="/sistema-de-eventos"><g:message code="default.button.back.label" default="Voltar ao Início" /></g:link>
+						<g:if test="${session?.usuario?.tipo?.equals('admin')}">
+							<g:link class="edit btn btn-warning" action="edit" resource="${inscricaoInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+							<g:actionSubmit class="delete btn btn-danger" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+							<g:link class="edit btn btn-primary" action="confirmarInscricao" resource="${inscricaoInstance}"><g:message code="default.button.confirmarInscricao.label" default="Confirmar Inscrição" /></g:link>
+						</g:if>
 					</fieldset>
-				</g:if>
 			</g:form>
 		</div>
 	</body>

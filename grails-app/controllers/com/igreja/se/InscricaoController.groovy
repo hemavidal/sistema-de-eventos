@@ -148,7 +148,6 @@ class InscricaoController {
 		if (inscricaoInstance.pessoa.hasErrors()) {
 			flash.type = 'alert-danger'
 			flash.message = "Erro de validação da pessoa!"
-			println pessoa.errors.properties
 			respond pessoa.errors, view:'edit'
 			return
 		}

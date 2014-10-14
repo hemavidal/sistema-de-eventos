@@ -124,9 +124,7 @@
 	    	<img id="comprovanteImg" class="" width="auto" height="100px"  src="${resource(dir:'comprovantes', file:fieldValue(bean:inscricaoInstance, field:'comprovante')).isEmpty() ? resource(dir:'comprovantes', file:fieldValue(bean:inscricaoInstance, field:'comprovante')) : resource(dir:'assets/images', file:'comprovante-default.png')}"/>
 	    	<g:field id="comprovanteInput" type='file' name='comprovante.file'/>
 	    </g:if>
-	    <g:else>
-	    	<img id="comprovanteImg" class="" width="auto" height="100px" src="${resource(dir:'comprovantes', file:fieldValue(bean:inscricaoInstance, field:'comprovante'))}"/>
-	    </g:else>
+	    
 		<p class="" style="color:red">Seu comprovante será analizado pelos responsáveis e a confirmação da inscrição será via EMAIL</p>
 	</div>
 </div>

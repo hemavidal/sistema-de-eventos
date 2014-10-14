@@ -121,11 +121,11 @@
 	</label>
 	<div class="col-sm-10">
 		<g:if test="${actionName in ['create','save', 'edit', 'update']}">
-	    	<img id="comprovanteImg" class="" width="auto" height="100px"  src="${createLinkTo(dir:'comprovantes', file:fieldValue(bean:inscricaoInstance, field:'comprovante')).isEmpty() ? createLinkTo(dir:'comprovantes', file:fieldValue(bean:inscricaoInstance, field:'comprovante')) : createLinkTo(dir:'assets/images', file:'comprovante-default.png')}"/>
+	    	<img id="comprovanteImg" class="" width="auto" height="100px"  src="${createLinkTo(dir:'comprovantes', file:inscricaoInstance.comprovante).isEmpty() ? createLinkTo(dir:'comprovantes', file:fieldValue(bean:inscricaoInstance, field:'comprovante')) : createLinkTo(dir:'assets/images', file:'comprovante-default.png')}"/>
 	    	<g:field id="comprovanteInput" type='file' name='comprovante.file'/>
 	    </g:if>
 	    <g:else>
-	    	<img id="comprovanteImg" class="" width="auto" height="100px" src="${createLinkTo(dir:'comprovantes', file:fieldValue(bean:inscricaoInstance, field:'comprovante'))}"/>
+	    	<img id="comprovanteImg" class="" width="auto" height="100px" src="${createLinkTo(dir:'comprovantes', file:inscricaoInstance?.comprovante)}"/>
 	    </g:else>
 		<p class="" style="color:red">Seu comprovante será analizado pelos responsáveis e a confirmação da inscrição será via EMAIL</p>
 	</div>
